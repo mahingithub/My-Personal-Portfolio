@@ -54,7 +54,10 @@ window.onscroll = () => {
 // ============================================
 // 4. Contact Form - Backend API Integration
 // ============================================
-const BACKEND_URL = '';
+
+// এখানে আপনার Render এর লিংকটি বসানো হয়েছে
+const BACKEND_URL = 'https://my-personal-portfolio-lzff.onrender.com';
+
 const contactForm = document.getElementById('contactForm');
 const formStatus = document.getElementById('formStatus');
 
