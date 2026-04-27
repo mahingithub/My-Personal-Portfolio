@@ -1,0 +1,1297 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  scroll-behavior: smooth;
+}
+
+/* --- THE EDITORIAL PALETTE --- */
+:root {
+  --bg-color: #ffffff;           
+  --second-bg-color: #fdfdfd;    /* Very clean near-white for the new hero background */
+  --section-bg-color: #f4f4f5;   /* Light gray for section contrast */
+  --text-color: #111827;         
+  --main-color: #ba0036;         /* Deep editorial red */
+  --main-hover: #E12127;         
+  
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 20px 40px -5px rgba(0, 0, 0, 0.12);
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Inter', 'Poppins', sans-serif;
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+}
+
+section {
+  min-height: 100vh;
+  padding: 10rem 6% 2rem;
+}
+
+/* =========================================
+   1. MODERN FLOATING NAVBAR (NEW)
+========================================= */
+.header-pill {
+  position: fixed;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 1000px;
+  background: var(--bg-color);
+  border-radius: 5rem;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
+  z-index: 1000;
+  transition: 0.3s ease;
+}
+/* Animated Text Styling */
+.multiple-text {
+  color: var(--main-color); /* Makes the animated text red */
+  text-shadow: 0 2px 4px rgba(186, 0, 54, 0.2); /* Subtle glow */
+}
+
+/* Customize the typing cursor */
+.typed-cursor {
+  color: var(--main-color);
+  font-size: 5.5rem;
+  font-weight: 300;
+}
+.logo {
+  font-size: 2.5rem;
+  color: var(--text-color);
+  font-weight: 700;
+  cursor: default;
+}
+
+.navbar-pill {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-pill a {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--text-color);
+  margin: 0 2rem;
+  transition: color 0.3s ease;
+}
+
+.navbar-pill a:hover,
+.navbar-pill a.active {
+  color: var(--main-color);
+}
+
+.nav-contact-btn {
+  padding: 1rem 2.5rem;
+  border: 2px solid var(--text-color);
+  border-radius: 3rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-color);
+  transition: 0.3s;
+}
+
+.nav-contact-btn:hover {
+  background: var(--main-color);
+  border-color: var(--main-color);
+  color: #ffffff;
+}
+
+#menu-icon {
+  font-size: 3.6rem;
+  color: var(--text-color);
+  display: none;
+  cursor: pointer;
+}
+
+/* =========================================
+   2. MODERN HERO SECTION (MIXED DESIGN)
+========================================= */
+.home-modern {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100vh;
+  padding: 15rem 9% 5rem;
+  background: var(--second-bg-color);
+  overflow: hidden;
+}
+
+.home-text {
+  max-width: 60rem;
+  z-index: 5;
+}
+
+.hello-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem 1.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #4b5563;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+.hello-badge::before, .hello-badge::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--main-color);
+}
+.hello-badge::before { top: -3px; left: -3px; }
+.hello-badge::after { bottom: -3px; right: -3px; }
+
+.main-title {
+  font-size: 5.5rem;
+  font-weight: 800;
+  color: var(--text-color);
+  line-height: 1.2;
+  margin-bottom: 2rem;
+}
+
+.highlight {
+  color: var(--main-color);
+  position: relative;
+  display: inline-block;
+}
+
+.highlight::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 8px;
+  background: #ffe0e6; 
+  bottom: 8px;
+  left: 0;
+  z-index: -1;
+}
+
+.subtitle {
+  font-size: 1.8rem;
+  color: #6b7280;
+  line-height: 1.6;
+  margin-bottom: 4rem;
+  max-width: 50rem;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.btn-primary {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--text-color); 
+  color: #ffffff;
+  padding: 0.8rem 0.8rem 0.8rem 3rem;
+  border-radius: 4rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn-primary .play-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4rem;
+  height: 4rem;
+  background: #ffffff;
+  color: var(--main-color); 
+  border-radius: 50%;
+  font-size: 2rem;
+}
+
+.btn-primary:hover {
+  background: var(--main-color);
+  transform: translateY(-3px);
+  color: #ffffff;
+}
+
+.btn-secondary {
+  padding: 1.2rem 3.5rem;
+  border: 2px solid var(--text-color);
+  border-radius: 4rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text-color);
+  transition: 0.3s;
+}
+
+.btn-secondary:hover {
+  border-color: var(--main-color);
+  color: var(--main-color);
+}
+
+.home-visuals {
+  position: relative;
+  width: 45vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* The red asymmetric shape behind you */
+/* The red asymmetric shape behind you (Now Hidden) */
+.red-bg-shape {
+  display: none; /* এই লাইনটি লাল শেপটিকে অদৃশ্য করে দেবে */
+}
+
+.hero-image {
+  width: 100%;
+  max-width: 480px;
+  z-index: 2;
+  position: relative;
+  filter: drop-shadow(0 15px 25px rgba(0,0,0,0.3));
+}
+
+/* Upgraded Floating Tags */
+.floating-tag {
+  position: absolute;
+  background: var(--bg-color);
+  padding: 1.2rem 2.5rem;
+  border-radius: 3rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text-color);
+  box-shadow: var(--shadow-md);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  animation: floatImage 4s ease-in-out infinite;
+}
+
+.tag-1 { top: 20%; right: -5%; animation-delay: 1s; }
+.tag-2 { bottom: 12%; left: -5%; color: var(--main-color); animation-delay: 2s; }
+
+/* =========================================
+   3. OTHER SECTIONS (About, Services, etc)
+========================================= */
+
+/* Standard Button for other sections */
+/* =========================================
+   3. MODERN ABOUT SECTION (Futuristic Vibe)
+========================================= */
+.about-modern {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6rem;
+  background: var(--bg-color); /* Matches the main theme */
+}
+
+/* Image Side with Futuristic Glow */
+.about-visuals {
+  flex: 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 550px;
+}
+
+.glow-box {
+  position: absolute;
+  top: -5%;
+  left: -5%;
+  width: 110%;
+  height: 110%;
+  /* A subtle red futuristic glowing box */
+  background: linear-gradient(135deg, rgba(186,0,54,0.08) 0%, rgba(186,0,54,0) 100%);
+  border-radius: 3rem;
+  z-index: 0;
+  border: 1px solid rgba(186,0,54,0.15); /* Thin tech border */
+  transition: 0.5s ease;
+}
+
+.about-img-futuristic {
+  width: 100%;
+  border-radius: 2rem;
+  position: relative;
+  z-index: 1;
+  box-shadow: var(--shadow-lg);
+  transition: transform 0.4s ease;
+}
+
+.image-wrapper:hover .about-img-futuristic {
+  transform: translateY(-10px);
+}
+.image-wrapper:hover .glow-box {
+  transform: scale(1.03);
+  border-color: rgba(186,0,54,0.4);
+}
+
+/* Text Side & Stats */
+.about-text-modern {
+  flex: 1;
+}
+
+.section-badge {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.section-badge .line {
+  width: 40px;
+  height: 3px;
+  background: var(--main-color);
+}
+
+.heading-modern {
+  font-size: 4.5rem;
+  font-weight: 800;
+  color: var(--text-color);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.heading-modern span {
+  color: var(--main-color);
+}
+
+.role-highlight {
+  font-size: 2rem;
+  color: var(--text-color);
+  font-weight: 500;
+  margin-bottom: 2.5rem;
+}
+
+.bio-text {
+  font-size: 1.6rem;
+  color: #4b5563;
+  line-height: 1.7;
+  margin-bottom: 4rem;
+}
+
+/* Futuristic Stats Panel (Inspired by Reference) */
+.about-stats {
+  display: flex;
+  gap: 4rem;
+  margin-bottom: 4rem;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 3rem;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stat-number {
+  font-size: 3.8rem;
+  font-weight: 800;
+  color: var(--main-color);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 1.5rem;
+  color: #4b5563;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* =========================================
+   5. MODERN PORTFOLIO SECTION (Futuristic)
+========================================= */
+.portfolio-modern {
+  background: var(--section-bg-color); /* Light gray to contrast with white cards */
+}
+
+/* Split Header (Left Title, Right Button) */
+.section-header-split {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 5rem;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.view-all-btn {
+  padding: 0.8rem 1rem 0.8rem 3rem; /* Adjusting padding for the play icon */
+}
+
+/* Modern Grid */
+.portfolio-grid-modern {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
+  gap: 4rem;
+}
+
+/* Futuristic Card Design */
+.portfolio-card-futuristic {
+  background: var(--bg-color); /* Clean white */
+  border-radius: 2.5rem;
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(186,0,54,0.03); /* Extremely subtle red tint */
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio-card-futuristic:hover {
+  transform: translateY(-12px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(186,0,54,0.2); /* Glows red on hover */
+}
+
+/* Image Area with Glassmorphism Tags */
+.portfolio-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.portfolio-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.portfolio-card-futuristic:hover .portfolio-img-wrapper img {
+  transform: scale(1.08); /* Futuristic zoom effect */
+}
+
+/* Glassmorphism Floating Tags */
+.tech-tags {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.glass-tag {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px); /* The Glassmorphism effect */
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--text-color);
+  padding: 0.8rem 1.8rem;
+  border-radius: 3rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.glass-tag.active-tag {
+  color: var(--main-color); /* Highlighted tag in red */
+}
+
+/* Text & Info Area */
+.portfolio-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 0 1rem 1rem;
+}
+
+.portfolio-info h4 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--text-color);
+  margin-bottom: 1.2rem;
+  letter-spacing: -0.5px;
+}
+
+.portfolio-info p {
+  font-size: 1.5rem;
+  color: #6b7280;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+  flex-grow: 1;
+}
+
+/* Minimalist Link inside Card */
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-color);
+  transition: 0.3s ease;
+  align-self: flex-start;
+}
+
+.project-link i {
+  font-size: 2.2rem;
+  transition: transform 0.3s ease;
+}
+
+.project-link:hover {
+  color: var(--main-color);
+}
+
+.project-link:hover i {
+  transform: translateX(5px); /* Arrow shoots forward on hover */
+}
+/* =========================================
+   4. MODERN SERVICES SECTION (Futuristic)
+========================================= */
+.services-modern {
+  background: var(--section-bg-color); /* Light gray background to pop the white cards */
+}
+
+/* Modern Grid */
+.services-grid-modern {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  gap: 3.5rem;
+}
+
+/* Futuristic Service Card */
+.service-card-futuristic {
+  background: var(--bg-color); /* Clean white */
+  border-radius: 2.5rem;
+  padding: 4.5rem 3.5rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(186,0,54,0.03);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Left aligns everything like the reference */
+  text-align: left;
+}
+
+.service-card-futuristic:hover {
+  transform: translateY(-12px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(186,0,54,0.15); /* Soft red glow on hover */
+}
+
+/* Futuristic Icon Wrapper */
+.service-icon-wrapper {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 2rem;
+  background: rgba(186,0,54,0.08); /* Soft red tint */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3rem;
+  transition: 0.4s ease;
+}
+
+.service-icon-wrapper i {
+  font-size: 3.2rem;
+  color: var(--main-color);
+  transition: 0.4s ease;
+}
+
+/* Awesome Hover Animation for the Icon */
+.service-card-futuristic:hover .service-icon-wrapper {
+  background: var(--main-color);
+  transform: scale(1.1) rotate(10deg); /* Scales and tilts slightly */
+  border-radius: 1.5rem;
+}
+
+.service-card-futuristic:hover .service-icon-wrapper i {
+  color: #ffffff;
+  transform: rotate(-10deg); /* Keeps the icon straight while box tilts */
+}
+
+/* Text Styling */
+.service-card-futuristic h4 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+}
+
+.service-card-futuristic p {
+  font-size: 1.5rem;
+  color: #6b7280;
+  line-height: 1.7;
+  margin-bottom: 3.5rem;
+  flex-grow: 1; /* Pushes the link to the very bottom */
+}
+
+/* Minimalist "Learn more ->" Link */
+.service-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--main-color);
+  transition: 0.3s ease;
+}
+
+.service-link i {
+  font-size: 2rem;
+  transition: transform 0.3s ease;
+}
+
+.service-link:hover {
+  color: var(--text-color); /* Changes to dark color on hover */
+}
+
+.service-link:hover i {
+  transform: translateX(6px); /* Arrow shoots forward */
+}
+
+/* =========================================
+   3.5 MODERN JOURNEY SECTION (Timeline)
+========================================= */
+.journey-modern {
+  background: var(--bg-color); /* White background */
+}
+
+.section-header-centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 6rem;
+}
+
+.journey-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(40rem, 1fr));
+  gap: 6rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.journey-column {
+  background: var(--section-bg-color); /* Light grey panel like the reference */
+  padding: 4rem;
+  border-radius: 3rem;
+  box-shadow: inset 0 2px 10px rgba(0,0,0,0.02); /* Very subtle inset shadow */
+}
+
+/* Column Header (Icon + Title) */
+.column-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.column-header .icon-box {
+  width: 6rem;
+  height: 6rem;
+  background: var(--main-color);
+  border-radius: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 10px 20px rgba(186, 0, 54, 0.2);
+}
+
+.column-header .icon-box i {
+  font-size: 3rem;
+  color: #ffffff;
+}
+
+.column-header h3 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: var(--text-color);
+}
+
+/* Futuristic Timeline Design */
+.timeline {
+  position: relative;
+  border-left: 2px dashed rgba(186, 0, 54, 0.2); /* Dashed line for a tech feel */
+  padding-left: 3.5rem;
+  margin-left: 3rem;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 4rem;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Glowing Timeline Dot */
+.timeline-dot {
+  position: absolute;
+  left: -4.2rem; /* Aligns with the border-left */
+  top: 0;
+  width: 1.6rem;
+  height: 1.6rem;
+  background: var(--bg-color);
+  border: 3px solid var(--main-color);
+  border-radius: 50%;
+  transition: 0.4s ease;
+  box-shadow: 0 0 0 4px rgba(186, 0, 54, 0.1);
+}
+
+/* Hover Effect for the entire timeline item */
+.timeline-content {
+  background: var(--bg-color);
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(186,0,54,0.03);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timeline-item:hover .timeline-content {
+  transform: translateX(10px); /* Slides right slightly */
+  box-shadow: var(--shadow-md);
+  border-color: rgba(186,0,54,0.15);
+}
+
+.timeline-item:hover .timeline-dot {
+  background: var(--main-color);
+  box-shadow: 0 0 15px var(--main-color); /* Dot glows on hover */
+}
+
+/* Timeline Text Styling */
+.timeline-date {
+  display: inline-block;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--main-color);
+  background: rgba(186, 0, 54, 0.08);
+  padding: 0.5rem 1.2rem;
+  border-radius: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.timeline-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.timeline-subtitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+}
+
+.timeline-text {
+  font-size: 1.4rem;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+/* =========================================
+   6. MODERN CONTACT SECTION (Futuristic Split)
+========================================= */
+/* =========================================
+   6. CYBER-TECH CONTACT SECTION (Futuristic)
+========================================= */
+.contact-cyber {
+  position: relative;
+  background: var(--bg-color);
+  padding: 12rem 9% 8rem;
+  overflow: hidden;
+}
+
+/* Futuristic Dot Matrix Background */
+.cyber-grid-bg {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-image: radial-gradient(var(--main-color) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.05; /* Subtle tech pattern */
+  z-index: 0;
+}
+
+.contact-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Cyber Header Styling */
+.contact-header-cyber {
+  text-align: center;
+  margin-bottom: 6rem;
+}
+
+.cyber-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: 'Courier New', Courier, monospace; /* Terminal font */
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #4b5563;
+  margin-bottom: 1.5rem;
+  letter-spacing: 2px;
+}
+
+.heading-cyber {
+  font-size: 5.5rem;
+  font-weight: 900;
+  color: var(--text-color);
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+.heading-cyber span {
+  color: var(--main-color);
+}
+
+.cyber-split-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 5rem;
+  align-items: flex-start;
+}
+
+/* Left Side: Cyber Data Cards */
+.cyber-info-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.cyber-data-card {
+  position: relative;
+  background: var(--bg-color);
+  padding: 3rem 2.5rem;
+  border: 1px solid #e5e7eb;
+  border-left: 4px solid var(--main-color); /* Sharp red indicator */
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  transition: 0.3s ease;
+}
+
+.cyber-data-card:hover {
+  transform: translateX(10px);
+  border-color: var(--main-color);
+  box-shadow: 0 10px 30px rgba(186,0,54,0.1);
+}
+
+/* Sci-fi decorative corner */
+.cyber-corner-accent {
+  position: absolute;
+  bottom: -1px; right: -1px;
+  width: 20px; height: 20px;
+  border-bottom: 3px solid var(--main-color);
+  border-right: 3px solid var(--main-color);
+  opacity: 0;
+  transition: 0.3s ease;
+}
+.cyber-data-card:hover .cyber-corner-accent { opacity: 1; }
+
+.cyber-icon {
+  font-size: 3.5rem;
+  color: var(--main-color);
+}
+
+.cyber-data h5 {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.5rem;
+  color: var(--main-color);
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
+}
+
+.cyber-data p {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+/* Right Side: Terminal Form */
+.cyber-form-wrapper {
+  position: relative;
+  background: var(--bg-color);
+  padding: 4rem;
+  border: 1px solid #d1d5db;
+  /* Cyberpunk Chamfered Corners */
+  clip-path: polygon(30px 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0 30px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Techy frame decorations */
+.cyber-frame-top {
+  position: absolute; top: 0; left: 30px; width: 100px; height: 4px; background: var(--main-color);
+}
+.cyber-frame-bottom {
+  position: absolute; bottom: 0; right: 30px; width: 100px; height: 4px; background: var(--main-color);
+}
+
+.cyber-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.cyber-input-group {
+  display: flex;
+  gap: 2rem;
+}
+
+.cyber-input-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.cyber-input-box label {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #6b7280;
+  letter-spacing: 1px;
+}
+
+/* Flat, underlined futuristic inputs */
+.cyber-form input,
+.cyber-form textarea {
+  width: 100%;
+  padding: 1.2rem 1.5rem;
+  font-size: 1.6rem;
+  color: var(--text-color);
+  background: var(--section-bg-color);
+  border: none;
+  border-bottom: 2px solid #d1d5db;
+  border-radius: 0; /* Sharp edges */
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.cyber-form input:focus,
+.cyber-form textarea:focus {
+  background: #ffffff;
+  border-bottom-color: var(--main-color);
+  box-shadow: inset 0 -3px 0 rgba(186, 0, 54, 0.1);
+  outline: none;
+}
+
+/* The Sci-Fi Button */
+.cyber-btn {
+  margin-top: 1rem;
+  padding: 1.8rem;
+  background: var(--main-color);
+  color: #ffffff;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  /* Angled Cut / Chamfered Button */
+  clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+  transition: 0.3s ease;
+}
+
+.cyber-btn:hover {
+  background: var(--text-color); /* Turns dark on hover */
+  transform: scale(1.02);
+}
+
+.cyber-status-text {
+  margin-top: 10px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.4rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+
+/* =========================================
+   7. CYBER-TECH FOOTER (Futuristic)
+========================================= */
+.footer-cyber {
+  background: var(--bg-color);
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* Glowing Neon Top Line */
+.footer-cyber::before {
+  content: '';
+  position: absolute;
+  top: 0; 
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--main-color), transparent);
+  box-shadow: 0 0 10px var(--main-color);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 4rem;
+  padding: 8rem 9% 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-brand .logo-cyber {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: var(--text-color);
+  letter-spacing: 2px;
+  margin-bottom: 2rem;
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+.footer-brand .logo-cyber span {
+  color: var(--main-color);
+}
+
+.footer-brand p {
+  font-size: 1.5rem;
+  color: #6b7280;
+  line-height: 1.7;
+  max-width: 45rem;
+  margin-bottom: 3rem;
+}
+
+/* Cyberpunk Chamfered Social Icons */
+.footer-socials {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-socials a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  background: var(--section-bg-color);
+  color: var(--text-color);
+  font-size: 2.2rem;
+  /* Cut corners effect */
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  transition: 0.3s ease;
+}
+
+.footer-socials a:hover {
+  background: var(--main-color);
+  color: #ffffff;
+  transform: translateY(-5px);
+}
+
+/* Terminal Style Links */
+.footer-links h4 {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.6rem;
+  color: var(--main-color);
+  margin-bottom: 2.5rem;
+  letter-spacing: 2px;
+}
+
+.footer-links ul {
+  list-style: none;
+}
+
+.footer-links ul li {
+  margin-bottom: 1.5rem;
+}
+
+.footer-links ul li a {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #6b7280;
+  transition: 0.3s ease;
+  display: inline-block;
+}
+
+.footer-links ul li a:hover {
+  color: var(--text-color);
+  transform: translateX(8px); /* Slides right like a terminal command */
+}
+
+/* Bottom Bar */
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3rem 9%;
+  background: var(--section-bg-color);
+  border-top: 1px solid #e5e7eb;
+}
+
+.cyber-copyright {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.3rem;
+  color: #6b7280;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.cyber-copyright .status {
+  color: var(--main-color);
+  margin-left: 10px;
+}
+
+/* Hexagon Back to Top Button */
+.btn-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5.5rem;
+  height: 5.5rem;
+  background: var(--bg-color);
+  color: var(--main-color);
+  font-size: 3rem;
+  border: 2px solid var(--main-color);
+  /* Creates a perfect Hexagon shape */
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  transition: 0.3s ease;
+}
+
+.btn-top:hover {
+  background: var(--main-color);
+  color: #ffffff;
+  transform: translateY(-5px) scale(1.1);
+}
+
+
+
+
+/* =========================================
+   4. MEDIA QUERIES & ANIMATIONS
+========================================= */
+@media (max-width: 1200px) { html { font-size: 55%; } }
+
+@media (max-width: 991px) {
+  .header-pill { width: 95%; padding: 1.5rem 2rem; }
+  section { padding: 10rem 5% 2rem; }
+  .home-modern { flex-direction: column; text-align: center; padding-top: 18rem; }
+  .home-text { margin-bottom: 5rem; display: flex; flex-direction: column; align-items: center; }
+  .subtitle { margin-left: auto; margin-right: auto; }
+  .home-visuals { width: 80vw; }
+    /* Add this inside your existing 991px media query */
+    .about-modern {
+      flex-direction: column;
+      text-align: center;
+    }
+    .section-badge {
+      justify-content: center;
+    }
+    .about-stats {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .heading-modern {
+      font-size: 3.8rem;
+    }
+  }
+  /* Add inside the 991px media query */
+  .journey-column {
+    padding: 3rem 2rem;
+  }
+  .timeline {
+    margin-left: 1rem;
+  }
+  .contact-container {
+    grid-template-columns: 1fr;
+  }
+  .input-group {
+    flex-direction: column;
+  }
+  .contact-form-wrapper {
+    padding: 4rem 2.5rem;
+  }
+
+  .cyber-split-layout { grid-template-columns: 1fr; }
+  .cyber-input-group { flex-direction: column; }
+  .heading-cyber { font-size: 4rem; }
+
+
+@media (max-width: 768px) {
+  #menu-icon { display: block; }
+  
+  /* Mobile Menu Styles */
+  .navbar-pill {
+    position: absolute; top: 100%; left: 0; width: 100%; padding: 2rem 5%;
+    background: var(--bg-color); box-shadow: var(--shadow-md); border-radius: 2rem;
+    display: none; flex-direction: column; text-align: center; margin-top: 1rem;
+  }
+  .navbar-pill.active { display: flex; }
+  .navbar-pill a { display: block; font-size: 2rem; margin: 1.5rem 0; }
+  .nav-contact-btn { display: none; } /* Hide the contact button on mobile header to save space */
+  
+  .about { flex-direction: column-reverse; text-align: center; }
+  .about-content h2 { text-align: center; }
+  .about-img { width: 60vw; margin-top: 3rem; }
+  .contact form .input-box input { width: 100%; }
+  
+  /* Resize red shape for mobile */
+  .red-bg-shape { width: 300px; height: 320px; }
+  .main-title { font-size: 4rem; }
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+  .footer-bottom {
+    flex-direction: column-reverse;
+    gap: 3rem;
+    text-align: center;
+  }
+  .cyber-copyright .status {
+    display: block;
+    margin-left: 0;
+    margin-top: 1rem;
+  }
+}
+
+@keyframes floatImage {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0); }
+}

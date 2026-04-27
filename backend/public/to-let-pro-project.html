@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Let Pro | Case Study</title>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <style>
+    /* Custom styles for this specific project page */
+    .terminal-box {
+      background: #0f172a;
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+      font-family: 'Courier New', Courier, monospace;
+      color: #10b981;
+      border: 1px solid #1e293b;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      overflow-x: auto;
+    }
+    .terminal-header {
+      display: flex;
+      gap: 0.8rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #1e293b;
+    }
+    .mac-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot-red { background: #ff5f56; }
+    .dot-yellow { background: #ffbd2e; }
+    .dot-green { background: #27c93f; }
+    
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+    }
+    .data-table th, .data-table td {
+      padding: 1.5rem;
+      text-align: left;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 1.5rem;
+    }
+    .data-table th {
+      color: var(--text-color);
+      font-weight: 800;
+      background: var(--section-bg-color);
+    }
+    .data-table td { color: #4b5563; }
+    .api-badge {
+      background: rgba(186,0,54,0.1);
+      color: var(--main-color);
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font-family: 'Courier New', monospace;
+      font-weight: 700;
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 0.5rem 1.5rem;
+      background: #ffbd2e;
+      color: #000;
+      border-radius: 2rem;
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-left: 1.5rem;
+      vertical-align: middle;
+    }
+
+    /* =========================================
+       FUTURISTIC BENTO GALLERY STYLES
+    ========================================= */
+    .bento-gallery {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: 350px 250px;
+      gap: 2.5rem;
+      margin-bottom: 6rem;
+    }
+    .bento-frame {
+      border-radius: 2.5rem;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(186,0,54,0.1);
+      position: relative;
+      background: var(--section-bg-color);
+      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+    }
+    .bento-frame:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(186,0,54,0.3);
+    }
+    .bento-img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .bento-frame:hover .bento-img {
+      transform: scale(1.08); /* Futuristic Zoom */
+    }
+    
+    /* Grid placement for 5 images */
+    .bento-1 { grid-column: span 4; } /* Main large image */
+    .bento-2 { grid-column: span 2; } /* Code architecture */
+    .bento-3 { grid-column: span 2; } /* Browse section */
+    .bento-4 { grid-column: span 2; } /* Dashboard */
+    .bento-5 { grid-column: span 2; } /* Mobile view / Chat */
+
+    /* Responsive Gallery for Mobile */
+    @media (max-width: 991px) {
+      .bento-gallery {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+      }
+      .bento-1, .bento-2, .bento-3, .bento-4, .bento-5 {
+        grid-column: span 1;
+        height: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header-pill">
+    <a href="index.html" class="logo">Mahin.</a>
+    <i class='bx bx-menu' id="menu-icon"></i>
+    <nav class="navbar-pill">
+      <a href="index.html#home">Home</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#portfolio">Projects</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <a href="index.html#contact" class="nav-contact-btn">Hire Me</a>
+  </header>
+
+  <section class="project-details" style="padding-top: 15rem; max-width: 1200px; margin: 0 auto; min-height: 100vh;">
+    
+    <div style="margin-bottom: 4rem;">
+      <a href="index.html#portfolio" style="color: var(--main-color); font-size: 1.6rem; font-weight: 700; display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 2.5rem; transition: 0.3s;">
+        <i class='bx bx-left-arrow-alt' style="font-size: 2.4rem;"></i> Back to Projects
+      </a>
+      
+      <h1 class="heading-modern" style="font-size: 5.5rem; margin-bottom: 1.5rem; text-align: left;">To-Let Pro <span>Platform</span> <span class="status-badge">IN DEVELOPMENT</span></h1>
+      
+      <blockquote style="border-left: 4px solid var(--main-color); padding-left: 2rem; margin: 2rem 0; background: var(--section-bg-color); padding: 2rem; border-radius: 0 1rem 1rem 0;">
+        <p style="font-size: 1.8rem; color: #4b5563; font-style: italic;">"Crafting a premium, scalable frontend architecture for Bangladesh's next-generation property rental platform using modern React paradigms."</p>
+      </blockquote>
+    </div>
+
+    <div class="bento-gallery">
+      <div class="bento-frame bento-1">
+        <img src="to_let_pro.png" alt="To-Let Pro Main UI" class="bento-img">
+      </div>
+      
+      <div class="bento-frame bento-2">
+        <img src="division.png" alt="React Code Architecture" class="bento-img">
+      </div>
+      
+      <div class="bento-frame bento-3">
+        <img src="populer_area.png" alt="Browse Properties" class="bento-img">
+      </div>
+      
+      <div class="bento-frame bento-4">
+        <img src="filter_find.png" alt="User Dashboard" class="bento-img">
+      </div>
+      
+      <div class="bento-frame bento-5">
+        <img src="show_home.png" alt="Mobile Responsive View" class="bento-img">
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 6rem; margin-bottom: 6rem;">
+      
+      <div>
+        <h3 style="font-size: 3rem; font-weight: 800; margin-bottom: 2rem; color: var(--text-color);">Current Progress: Frontend Architecture</h3>
+        <p style="font-size: 1.6rem; color: #4b5563; line-height: 1.8; margin-bottom: 3rem;">
+          To-Let Pro is currently in the active frontend development phase. The focus is on building a highly modular, reusable, and responsive user interface. Using <strong>Vite</strong> and <strong>React</strong>, the project features a complex component tree mapped out via React Router DOM.
+        </p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 4rem;">
+          <div style="background: var(--section-bg-color); padding: 3rem; border-radius: 2rem;">
+            <h4 style="font-size: 2rem; color: var(--text-color); margin-bottom: 1.5rem;"><i class='bx bx-layer' style="color: var(--main-color);"></i> Core Components</h4>
+            <ul style="font-size: 1.5rem; color: #4b5563; line-height: 1.8; padding-left: 2rem;">
+              <li>Dynamic <code>HeroSection</code> & <code>Navbar</code></li>
+              <li><code>BrowseByLocation</code> filtering UI</li>
+              <li>Dedicated <code>HostDashboard</code> & <code>TenantDashboard</code></li>
+              <li>Integrated <code>ChatSystem</code> UI</li>
+            </ul>
+          </div>
+          
+          <div style="background: var(--section-bg-color); padding: 3rem; border-radius: 2rem;">
+            <h4 style="font-size: 2rem; color: var(--text-color); margin-bottom: 1.5rem;"><i class='bx bx-code-block' style="color: var(--main-color);"></i> State & Routing</h4>
+            <ul style="font-size: 1.5rem; color: #4b5563; line-height: 1.8; padding-left: 2rem;">
+              <li>Global state via <code>LanguageContext</code></li>
+              <li>Seamless navigation using <code>react-router-dom</code></li>
+              <li>Utility-first styling with <code>Tailwind CSS</code></li>
+              <li>Fast HMR & build using Vite</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div style="background: var(--section-bg-color); padding: 4rem; border-radius: 2.5rem; border: 1px solid rgba(186,0,54,0.05); height: fit-content;">
+        <h4 style="font-size: 2rem; font-weight: 800; margin-bottom: 2.5rem; color: var(--text-color);">Frontend Stack</h4>
+        
+        <div style="display: flex; flex-wrap: wrap; gap: 1.2rem; margin-bottom: 4rem;">
+          <span class="api-badge">React.js</span>
+          <span class="api-badge">React Router</span>
+          <span class="api-badge">Context API</span>
+          <span class="api-badge">Tailwind CSS</span>
+          <span class="api-badge">Vite</span>
+          <span class="api-badge">PostCSS</span>
+        </div>
+
+        <h4 style="font-size: 2rem; font-weight: 800; margin-bottom: 1.5rem; color: var(--text-color);">Upcoming Phase</h4>
+        <p style="font-size: 1.5rem; color: #4b5563; margin-bottom: 3rem; line-height: 1.6;">
+          <i class='bx bx-server'></i> Node.js/Express Backend <br>
+          <i class='bx bx-data'></i> MongoDB Integration <br>
+          <i class='bx bx-lock-alt'></i> JWT Authentication
+        </p>
+
+        <a href="#" class="btn-primary" style="display: flex; justify-content: center; width: 100%; padding: 1.5rem;">
+          Track Progress <i class='bx bxl-github' style="margin-left: 1rem; font-size: 2rem;"></i>
+        </a>
+      </div>
+
+    </div>
+
+    <h3 style="font-size: 3rem; font-weight: 800; margin-bottom: 2rem; margin-top: 6rem; color: var(--text-color);">Current React Architecture</h3>
+    <div class="terminal-box" style="margin-bottom: 8rem;">
+      <div class="terminal-header">
+        <div class="mac-dot dot-red"></div>
+        <div class="mac-dot dot-yellow"></div>
+        <div class="mac-dot dot-green"></div>
+      </div>
+<pre style="font-size: 1.4rem; line-height: 1.6;">
+TO-LET PRO PROJECT/
+├── <span style="color: #60a5fa;">public/</span>
+│   └── <span style="color: #60a5fa;">image/</span>               <span style="color: #64748b;"># Static assets</span>
+├── <span style="color: #60a5fa;">src/</span>
+│   ├── <span style="color: #60a5fa;">components/</span>          <span style="color: #64748b;"># Modular UI Components</span>
+│   │   ├── AddProperty.jsx
+│   │   ├── BrowseByLocation.jsx
+│   │   ├── ChatSystem.jsx
+│   │   ├── HostDashboard.jsx
+│   │   ├── Navbar.jsx
+│   │   ├── PropertyDetails.jsx
+│   │   ├── TenantDashboard.jsx
+│   │   └── ... (and more)
+│   ├── <span style="color: #60a5fa;">context/</span>             <span style="color: #64748b;"># Global Providers</span>
+│   │   └── LanguageContext.jsx
+│   ├── App.jsx              <span style="color: #64748b;"># Main Router & Component Composition</span>
+│   ├── index.css            <span style="color: #64748b;"># Global Tailwind imports</span>
+│   └── main.jsx             <span style="color: #64748b;"># React DOM render entry</span>
+├── index.html               <span style="color: #64748b;"># Vite entry point</span>
+├── package.json
+├── postcss.config.js        <span style="color: #64748b;"># Tailwind utility configuration</span>
+└── tailwind.config.js
+</pre>
+    </div>
+
+  </section>
+
+  <footer class="footer-cyber">
+    <div class="footer-bottom" style="padding-top: 5rem;">
+      <p class="cyber-copyright">
+        &copy; 2024 ASRAF ALOM MAHIN. <span class="status">[ ALL SYSTEMS ONLINE ]</span>
+      </p>
+      <div class="footer-iconTop">
+        <a href="#" class="btn-top" title="Return to Top">
+          <i class='bx bx-chevron-up'></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
