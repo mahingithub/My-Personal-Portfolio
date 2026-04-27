@@ -21,7 +21,7 @@ menuIcon.onclick = () => {
 };
 
 // ============================================
-// 3. Scroll Sections Active Link
+// 3. Scroll Sections Active Link (Fixed classList error)
 // ============================================
 let sections = document.querySelectorAll('section');
 let navLinks = document.querySelectorAll('header nav a');
@@ -37,27 +37,33 @@ window.onscroll = () => {
       if (top >= offset && top < offset + height) {
           navLinks.forEach(links => {
               links.classList.remove('active');
-              document.querySelector('header nav a[href*=' + id + ']').classList.add('active');
           });
+          
+          // Added null check to prevent website crash
+          let activeLink = document.querySelector('header nav a[href*=' + id + ']');
+          if (activeLink) {
+              activeLink.classList.add('active');
+          }
       };
   });
 
   // Sticky navbar
   let header = document.querySelector('.header-pill'); // Updated class name
-  header.classList.toggle('sticky', window.scrollY > 100);
+  if (header) {
+      header.classList.toggle('sticky', window.scrollY > 100);
+  }
 
   // Remove toggle icon and navbar when clicking navbar link (scroll)
-  menuIcon.classList.remove('bx-x');
-  navbar.classList.remove('active');
+  if (menuIcon && navbar) {
+      menuIcon.classList.remove('bx-x');
+      navbar.classList.remove('active');
+  }
 };
 
 // ============================================
 // 4. Contact Form - Backend API Integration
 // ============================================
-
-// এখানে আপনার Render এর লিংকটি বসানো হয়েছে
 const BACKEND_URL = 'https://my-personal-portfolio-lzff.onrender.com';
-
 const contactForm = document.getElementById('contactForm');
 const formStatus = document.getElementById('formStatus');
 
@@ -66,7 +72,7 @@ contactForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const submitBtn = document.getElementById('contactSubmitBtn');
-  const originalText = submitBtn.value;
+  const originalText = submitBtn.innerHTML;
 
   const formData = {
     name: document.getElementById('contactName').value.trim(),
@@ -87,7 +93,7 @@ contactForm.addEventListener('submit', async (e) => {
     return;
   }
 
-  submitBtn.value = 'Sending...';
+  submitBtn.innerHTML = 'Sending... <i class="bx bx-loader-alt bx-spin"></i>';
   submitBtn.disabled = true;
   formStatus.textContent = '';
 
@@ -114,7 +120,7 @@ contactForm.addEventListener('submit', async (e) => {
     formStatus.style.color = '#ba0036'; // Theme red
     console.error('Contact form error:', error);
   } finally {
-    submitBtn.value = originalText;
+    submitBtn.innerHTML = originalText;
     submitBtn.disabled = false;
   }
 });
