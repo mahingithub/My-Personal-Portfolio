@@ -1161,6 +1161,10 @@
     const levelField = form.querySelector('.brief-level');
     const preview = document.getElementById('briefPreview');
     const whatsappLink = document.getElementById('briefWhatsApp');
+    // Wake the free Render backend while the visitor is still writing, so Send answers quickly.
+    const wake = () => fetch(`${BACKEND_URL}/api/health`, { cache: 'no-store' }).catch(() => {});
+    form.addEventListener('focusin', wake, { once: true });
+    form.addEventListener('pointerdown', wake, { once: true });
     const doneCount = document.getElementById('briefDone');
     const submitButton = document.getElementById('contactSubmitBtn');
     const nameInput = document.getElementById('contactName');
@@ -1326,7 +1330,9 @@
           const errors = Array.isArray(result?.errors) ? result.errors.map(error => typeof error === 'string' ? error : error.message).filter(Boolean).join(' ') : '';
           throw new Error(errors || (response.status === 429
             ? `You’ve sent several briefs recently. Please try again later, or ${fallback}.`
-            : `Your brief could not be sent. Please try again, or ${fallback}.`));
+            : response.status === 503 && result?.message
+              ? result.message
+              : `Your brief could not be sent. Please try again, or ${fallback}.`));
         }
       } catch (error) {
         status.dataset.state = 'error';

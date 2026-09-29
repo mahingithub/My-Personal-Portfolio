@@ -4,6 +4,7 @@
 const Contact = require('../models/Contact');
 const { sendContactNotification } = require('../utils/emailService');
 const { appendToSheet, deleteFromSheet } = require('../config/googleSheets');
+const { isDBConnected } = require('../config/db');
 
 /**
  * @desc    Submit a new contact message
@@ -14,8 +15,7 @@ const submitContact = async (req, res) => {
   try {
     const { name, email, phone, subject, message } = req.body;
 
-    // 1. Save to MongoDB (primary storage)
-    const contact = await Contact.create({
+    const contact = new Contact({
       name,
       email: email || undefined,
       phone: phone || undefined,
@@ -23,6 +23,40 @@ const submitContact = async (req, res) => {
       message,
       ip: req.ip,
     });
+    await contact.validate();
+
+    // 1. Save to MongoDB (primary storage). If the database is unreachable,
+    //    don't lose the brief: email it (and copy it to the sheet) instead.
+    let saved = false;
+    if (isDBConnected()) {
+      try {
+        await contact.save();
+        saved = true;
+      } catch (error) {
+        console.error('❌ Saving to MongoDB failed, falling back to email:', error.message);
+      }
+    }
+
+    if (!saved) {
+      contact.createdAt = new Date();
+      if (process.env.GOOGLE_SHEETS_ENABLED === 'true') {
+        appendToSheet(contact).catch((err) =>
+          console.error('Google Sheets background error:', err.message)
+        );
+      }
+      const emailed = await sendContactNotification(contact);
+      if (!emailed) {
+        return res.status(503).json({
+          success: false,
+          message: 'Messages can’t be delivered right now. Please try again later or use WhatsApp.',
+        });
+      }
+      return res.status(201).json({
+        success: true,
+        message: 'Thank you! Your message has been sent successfully. ✅',
+        data: { id: contact._id, name: contact.name, createdAt: contact.createdAt },
+      });
+    }
 
     // 2. Save to Google Sheets (backup - runs in background)
     if (process.env.GOOGLE_SHEETS_ENABLED === 'true') {

@@ -17,6 +17,16 @@ const {
 const { contactLimiter } = require('../middleware/rateLimiter');
 const adminAuth = require('../middleware/adminAuth');
 const { contactValidationRules, validate } = require('../utils/validators');
+const { isDBConnected } = require('../config/db');
+
+// Admin pages read saved messages, so they need the database.
+const requireDB = (req, res, next) => {
+  if (isDBConnected()) return next();
+  res.status(503).json({
+    success: false,
+    message: 'The database is not connected. Check MONGODB_URI on the server; new briefs are still emailed.',
+  });
+};
 
 // ──────────────────────────────────────────────
 // PUBLIC ROUTES
@@ -44,27 +54,27 @@ router.post(
  * @desc    Get all messages (paginated, sortable, searchable)
  * @access  Admin
  */
-router.get('/messages', adminAuth, getAllMessages);
+router.get('/messages', adminAuth, requireDB, getAllMessages);
 
 /**
  * @route   GET /api/messages/:id
  * @desc    Get a single message by ID
  * @access  Admin
  */
-router.get('/messages/:id', adminAuth, getMessage);
+router.get('/messages/:id', adminAuth, requireDB, getMessage);
 
 /**
  * @route   DELETE /api/messages/:id
  * @desc    Delete a message
  * @access  Admin
  */
-router.delete('/messages/:id', adminAuth, deleteMessage);
+router.delete('/messages/:id', adminAuth, requireDB, deleteMessage);
 
 /**
  * @route   PATCH /api/messages/:id/read
  * @desc    Toggle read/unread status
  * @access  Admin
  */
-router.patch('/messages/:id/read', adminAuth, toggleReadStatus);
+router.patch('/messages/:id/read', adminAuth, requireDB, toggleReadStatus);
 
 module.exports = router;

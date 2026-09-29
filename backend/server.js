@@ -16,12 +16,17 @@ const path = require('path');
 
 // Local modules
 const connectDB = require('./config/db');
+const { isDBConnected } = connectDB;
 const contactRoutes = require('./routes/contactRoutes');
 const { apiLimiter } = require('./middleware/rateLimiter');
 const { initializeSheet } = require('./config/googleSheets');
 
 // Initialize Express app
 const app = express();
+
+// Render sits behind a proxy; without this every visitor shares the proxy's IP
+// and the contact rate limit (5 per 15 min) applies to everyone at once.
+app.set('trust proxy', 1);
 
 // ──────────────────────────────────────────────
 // DATABASE CONNECTION
@@ -47,11 +52,19 @@ app.use(
   })
 );
 
-// CORS - Allow frontend to communicate with backend
+// CORS - Allow frontend to communicate with backend.
+// FRONTEND_URL may list several sites, comma-separated. The Vercel deployments
+// of this project are always allowed, since Vercel serves one site from many URLs.
+const allowedOrigins = (process.env.FRONTEND_URL || '')
+  .split(',')
+  .map((url) => url.trim().replace(/\/+$/, ''))
+  .filter(Boolean);
+const vercelOrigin = /^https:\/\/my-personal-portfolio[a-z0-9-]*\.vercel\.app$/;
+
 app.use(
   cors({
-    origin: process.env.NODE_ENV === 'production' 
-      ? process.env.FRONTEND_URL 
+    origin: process.env.NODE_ENV === 'production'
+      ? (origin, callback) => callback(null, !origin || allowedOrigins.includes(origin) || vercelOrigin.test(origin))
       : '*', // Allow all origins in development
     methods: ['GET', 'POST', 'DELETE', 'PATCH'],
     allowedHeaders: ['Content-Type', 'x-admin-password'],
@@ -92,6 +105,7 @@ app.get('/api/health', (req, res) => {
     message: '🟢 Portfolio Backend is running!',
     timestamp: new Date().toISOString(),
     environment: process.env.NODE_ENV,
+    database: isDBConnected() ? 'connected' : 'disconnected',
   });
 });
 

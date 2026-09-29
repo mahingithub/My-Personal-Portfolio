@@ -528,11 +528,17 @@
             document.getElementById('mainApp').classList.add('visible');
             sessionStorage.setItem('adminPassword', adminPassword);
             loadMessages();
-          } else {
+          } else if (res.status === 401 || res.status === 403) {
             errorEl.textContent = 'Invalid password. Please try again.';
             errorEl.classList.add('show');
             passwordInput.value = '';
             passwordInput.focus();
+          } else {
+            // e.g. 503 when the database is not connected: show the server's reason.
+            return res.json().catch(() => null).then((body) => {
+              errorEl.textContent = body?.message || `Server error (${res.status}). Please try again.`;
+              errorEl.classList.add('show');
+            });
           }
         })
         .catch(() => {
