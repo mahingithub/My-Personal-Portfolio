@@ -52,6 +52,9 @@
   // The project brief on the homepage, with a project already picked as the reference.
   const briefUrl = project => `index.html${project ? `?ref=${encodeURIComponent(project.slug)}` : ''}#contact`;
 
+  // Where the contact API runs: the backend on Render (it also works when Render serves these pages).
+  const BACKEND_URL = 'https://my-personal-portfolio-lzff.onrender.com';
+
   const contactChannels = project => [
     contact.whatsapp && { id: 'whatsapp', icon: 'whatsapp', label: 'WhatsApp', detail: 'Chat with me now', href: whatsappUrl(greeting(project)), external: true },
     contact.phone && { id: 'call', icon: 'call', label: 'Call me', detail: contact.phoneLabel || contact.phone, href: `tel:${contact.phone.replace(/[^\d+]/g, '')}`, copy: contact.phoneLabel || contact.phone },
@@ -1302,10 +1305,12 @@
       form.setAttribute('aria-busy', 'true');
       status.dataset.state = 'pending';
       status.textContent = '';
+      // A free Render service that has been asleep can take up to a minute to answer.
       const controller = new AbortController();
-      const timeout = window.setTimeout(() => controller.abort(), 15000);
+      const timeout = window.setTimeout(() => controller.abort(), 60000);
+      const slow = window.setTimeout(() => { buttonText.textContent = 'Still sending…'; }, 6000);
       try {
-        const response = await fetch('/api/contact', {
+        const response = await fetch(`${BACKEND_URL}/api/contact`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
@@ -1330,6 +1335,7 @@
           : error.message;
       } finally {
         window.clearTimeout(timeout);
+        window.clearTimeout(slow);
         submitButton.disabled = false;
         buttonText.textContent = originalText;
         form.removeAttribute('aria-busy');
