@@ -611,6 +611,14 @@
   gap: 12px;
   font-family: Manrope, system-ui, sans-serif;
   transition: opacity .35s ease, transform .6s var(--m-ease), visibility 0s linear 0s;
+  /* The wrapper keeps the closed panel's size, which on phones covers most of
+     the screen; only the button and the open panel should catch taps. */
+  pointer-events: none;
+}
+
+.talk:not(.is-away) .talk-toggle,
+.talk.is-open:not(.is-away) .talk-panel {
+  pointer-events: auto;
 }
 
 .talk.is-away {
