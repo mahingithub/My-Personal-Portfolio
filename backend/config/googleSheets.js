@@ -53,17 +53,17 @@ const initializeSheet = async () => {
   try {
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
-      range: 'Sheet1!A1:F1',
+      range: 'Sheet1!A1:G1',
     });
 
     // If no headers exist, add them
     if (!response.data.values || response.data.values.length === 0) {
       await sheets.spreadsheets.values.update({
         spreadsheetId: process.env.GOOGLE_SHEET_ID,
-        range: 'Sheet1!A1:F1',
+        range: 'Sheet1!A1:G1',
         valueInputOption: 'RAW',
         requestBody: {
-          values: [['ID', 'Name', 'Email', 'Subject', 'Message', 'Date']],
+          values: [['ID', 'Name', 'Email', 'Subject', 'Message', 'Date', 'Phone']],
         },
       });
       console.log('📊 Google Sheet headers initialized');
@@ -87,17 +87,18 @@ const appendToSheet = async (contact) => {
   try {
     await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
-      range: 'Sheet1!A:F',
+      range: 'Sheet1!A:G',
       valueInputOption: 'RAW',
       insertDataOption: 'INSERT_ROWS',
       requestBody: {
         values: [[
           contact._id.toString(),
           contact.name,
-          contact.email,
+          contact.email || '',
           contact.subject,
           contact.message,
           new Date(contact.createdAt).toLocaleString(),
+          contact.phone || '',
         ]],
       },
     });

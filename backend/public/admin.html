@@ -635,7 +635,7 @@
               <td>
                 <div class="sender-info">
                   <span class="sender-name">${escapeHtml(msg.name)}</span>
-                  <span class="sender-email">${escapeHtml(msg.email)}</span>
+                  <span class="sender-email">${escapeHtml(msg.email || msg.phone || '')}</span>
                 </div>
               </td>
               <td style="font-weight:${msg.isRead ? '400' : '600'}">${escapeHtml(msg.subject)}</td>
@@ -729,10 +729,16 @@
             <div class="modal-label"><i class="bx bx-user"></i> Name</div>
             <div class="modal-value">${escapeHtml(msg.name)}</div>
           </div>
+          ${msg.email ? `
           <div class="modal-field">
             <div class="modal-label"><i class="bx bx-envelope"></i> Email</div>
             <div class="modal-value"><a href="mailto:${escapeHtml(msg.email)}">${escapeHtml(msg.email)}</a></div>
-          </div>
+          </div>` : ''}
+          ${msg.phone ? `
+          <div class="modal-field">
+            <div class="modal-label"><i class="bx bx-phone"></i> Phone / WhatsApp</div>
+            <div class="modal-value">${escapeHtml(msg.phone)} · <a href="${whatsappLink(msg.phone)}" target="_blank" rel="noopener">WhatsApp</a> · <a href="tel:${escapeHtml(msg.phone.replace(/[^\d+]/g, ''))}">Call</a></div>
+          </div>` : ''}
           <div class="modal-field">
             <div class="modal-label"><i class="bx bx-edit"></i> Subject</div>
             <div class="modal-value">${escapeHtml(msg.subject)}</div>
@@ -747,7 +753,10 @@
           </div>`;
 
         document.getElementById('modalDeleteBtn').onclick = () => { closeModal(); deleteMessage(id); };
-        document.getElementById('modalReplyBtn').href = `mailto:${msg.email}?subject=Re: ${encodeURIComponent(msg.subject)}`;
+        // Reply by email when there is one, otherwise on WhatsApp.
+        const replyButton = document.getElementById('modalReplyBtn');
+        replyButton.href = msg.email ? `mailto:${msg.email}?subject=Re: ${encodeURIComponent(msg.subject)}` : whatsappLink(msg.phone);
+        replyButton.target = msg.email ? '' : '_blank';
 
         document.getElementById('messageModal').classList.add('show');
 
@@ -830,6 +839,12 @@
       const div = document.createElement('div');
       div.textContent = text;
       return div.innerHTML;
+    }
+
+    // WhatsApp chat link; local Bangladeshi numbers (01…) get the 880 country code.
+    function whatsappLink(phone) {
+      const digits = String(phone || '').replace(/\D/g, '');
+      return `https://wa.me/${digits.startsWith('0') ? `88${digits}` : digits}`;
     }
   </script>
 </body>

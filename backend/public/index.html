@@ -2,434 +2,401 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Asraf Alom</title>
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  <link rel="stylesheet" href="css/style.css">
+  <meta name="theme-color" content="#070d0c">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Asraf Alom (Mahin) is a UI designer and full-stack developer in Dhaka, Bangladesh, building websites and web apps for fashion, food, real estate, finance and more.">
+  <meta property="og:title" content="Asraf Alom · UI Designer & Full-Stack Developer">
+  <meta property="og:description" content="Sharp design. Solid code. See the work in 3D, browse it by industry, and find out exactly how each project was built.">
+  <meta property="og:type" content="website">
+  <title>Asraf Alom · UI Designer & Full-Stack Developer</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/portfolio.css">
+  <link rel="stylesheet" href="css/motion.css">
+  <link rel="stylesheet" href="css/contact.css">
+  <script>
+    (function (root) {
+      root.classList.add('js');
+      // Page transition: the page you came from leaves a note, so this one can reveal itself (see js/script.js).
+      try {
+        var note = JSON.parse(sessionStorage.getItem('pt'));
+        sessionStorage.removeItem('pt');
+        if (note && Date.now() - note.at < 4000 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          root.classList.add('pt-in');
+          root.dataset.ptLabel = String(note.label || '');
+          if (/^#[\da-f]{3,8}$/i.test(note.color)) root.style.setProperty('--pt-color', note.color);
+        }
+      } catch (error) {}
+    })(document.documentElement);
+  </script>
+  <script src="js/projects.js" defer></script>
+  <script src="js/contact.js" defer></script>
+  <script src="js/script.js" defer></script>
 </head>
 <body>
-  <!-- about section -->
-  <section class="home-modern" id="home">
-    <header class="header-pill">
-      <a href="#" class="logo">Mahin.</a>
-      <i class='bx bx-menu' id="menu-icon"></i>
-      <nav class="navbar-pill">
-        <a href="#home" class="active">Home</a>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#portfolio">Projects</a>
-        <a href="#contact">Contact</a>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-inner">
+      <a class="brand" href="#home" aria-label="Mahin, back to top"><span class="brand-mark" aria-hidden="true">m<span>.</span></span><span>mahin<span class="brand-dot">.</span></span></a>
+      <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+        <a href="#work">Work</a><a href="#skills">Skills</a><a href="#industries">Industries</a><a href="#services">Services</a><a href="#about">About</a>
       </nav>
-      <a href="#contact" class="nav-contact-btn">Hire Me</a>
-    </header>
-    
-    <div class="home-text">
-      <div class="hello-badge">
-        <i class='bx bx-crop'></i> Hello There!
-      </div>
-      
-      <h1 class="main-title">
-        I'm Asraf Alom,<br>
-        A <span class="multiple-text"></span><br>
-        Based in BD.
-      </h1>
-      
-      <p class="subtitle">
-        I'm an experienced MERN Stack Developer, collaborating with clients to build high-performance web applications and clean UI designs.
-      </p>
-
-      <div class="action-buttons">
-        <a href="Asraf_Alom_CV.pdf" download="Asraf_Alom_CV.pdf" class="btn-primary">
-          Download CV <span class="play-icon"><i class='bx bx-right-arrow' ></i></span>
-        </a>
-        <a href="#contact" class="btn-secondary">Hire Me</a>
-      </div>
+      <a class="button button-primary nav-cta" href="#contact">Start a project <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow-up-right"/></svg></a>
+      <button class="menu-toggle" type="button" aria-label="Open navigation" aria-controls="main-nav" aria-expanded="false"><span></span><span></span></button>
     </div>
+  </header>
 
-    <div class="home-visuals">
-      <div class="red-bg-shape"></div>
-      
-      <img src="ffff.png" alt="Asraf Alom" class="hero-image">
-      
-      <div class="floating-tag tag-1">
-        <i class='bx bx-atom' style="color: #4b5563;"></i> MERN Stack
-      </div>
-      <div class="floating-tag tag-2">
-        UI/UX Integration
-      </div>
-    </div>
-    
-  </section>
-
-<!-- about section -->
-
-<section class="about-modern" id="about">
-    
-  <div class="about-visuals">
-    <div class="image-wrapper">
-      <div class="glow-box"></div>
-      <img src="nh.png" alt="About Mahin" class="about-img-futuristic">
-    </div>
-  </div>
-
-  <div class="about-text-modern">
-    <div class="section-badge">
-      <span class="line"></span> About Me
-    </div>
-    
-    <h2 class="heading-modern">Who is <span>Asraf Alom?</span></h2>
-    <h3 class="role-highlight">MERN Stack Innovator & UI/UX Enthusiast</h3>
-    
-    <p class="bio-text">
-      Hello there! 👋 I'm a passionate web developer dedicated to turning complex ideas into seamless digital experiences. With a strong foundation in the MERN stack and a keen eye for "No-Line" futuristic design, I bridge the gap between robust backend logic and stunning frontend interfaces.
-    </p>
-
-    <div class="about-stats">
-      <div class="stat-item">
-        <h4 class="stat-number">1+</h4>
-        <p class="stat-label">Years of<br>Experience</p>
-      </div>
-      <div class="stat-item">
-        <h4 class="stat-number">15+</h4>
-        <p class="stat-label">Projects<br>Completed</p>
-      </div>
-      <div class="stat-item">
-        <h4 class="stat-number">100%</h4>
-        <p class="stat-label">Client<br>Satisfaction</p>
-      </div>
-    </div>
-
-    <a href="#contact" class="btn-primary" style="display: inline-flex; margin-top: 1rem;">
-      Let's Talk <span class="play-icon" style="margin-left: 1rem;"><i class='bx bx-right-arrow-alt'></i></span>
-    </a>
-  </div>
-
-</section>
-
-<!-- Services section  -->
-
-<section class="portfolio-modern" id="portfolio">
-    
-  <div class="section-header-split">
-    <div class="header-left">
-      <div class="section-badge">
-        <span class="line"></span> My Portfolio
-      </div>
-      <h2 class="heading-modern">My Latest <span>Projects</span></h2>
-    </div>
-    <div class="header-right">
-      <a href="https://github.com/mahingithub" target="_blank" class="btn-primary view-all-btn">
-        View All Projects <span class="play-icon"><i class='bx bx-right-arrow-alt'></i></span>
-      </a>
-    </div>
-  </div>
-
-  <div class="portfolio-grid-modern">
-
-    <div class="portfolio-card-futuristic">
-      <div class="portfolio-img-wrapper">
-        <img src="to_let_pro.png" alt="To-Let Pro">
-        <div class="tech-tags">
-          <span class="glass-tag active-tag">React.js</span>
-          <span class="glass-tag">Tailwind CSS</span>
-          <span class="glass-tag">Vite</span>
-          <span class="glass-tag">PostCSS</span>
-          <span class="glass-tag">Context API</span>
-        </div>
-      </div>
-      <div class="portfolio-info">
-        <h4>To-Let Pro Platform</h4>
-        <p>A comprehensive home rental management platform featuring advanced property search, real-time booking, and secure user authentication.</p>
-        <a href="to-let-pro-project.html" class="project-link">View Case Study <i class='bx bx-right-arrow-alt'></i></a>
-      </div>
-    </div>
-
-    <div class="portfolio-card-futuristic">
-      <div class="portfolio-img-wrapper">
-        <img src="system_monitor.png" alt="Admin Dashboard">
-        <div class="tech-tags">
-          <span class="glass-tag active-tag">React.js</span>
-          <span class="glass-tag">Tailwind CSS</span>
-          <span class="glass-tag">WebSockets</span>
-          <span class="glass-tag">Recharts</span>
-          <span class="glass-tag">Node.js</span>
-          <span class="glass-tag">MongoDB</span>
-        </div>
-      </div>
-      <div class="portfolio-info">
-        <h4>System Monitor — Dashboard</h4>
-        <p>A reactive admin panel designed with seamless UI transitions, interactive charts, and real-time database management.</p>
-        <a href="os-monitor-project.html" class="project-link">View Case Study <i class='bx bx-right-arrow-alt'></i></a>
-      </div>
-    </div>
-
-    <div class="portfolio-card-futuristic">
-      <div class="portfolio-img-wrapper">
-        <img src="images/img3.jpg" alt="Video Editing">
-        <div class="tech-tags">
-          <span class="glass-tag active-tag">Premiere Pro</span>
-          <span class="glass-tag">After Effects</span>
-        </div>
-      </div>
-      <div class="portfolio-info">
-        <h4>Brand Story Reel</h4>
-        <p>Dynamic video editing project showcasing motion graphics, advanced color grading, and captivating storytelling.</p>
-        <a href="#" class="project-link">View Case Study <i class='bx bx-right-arrow-alt'></i></a>
-      </div>
-    </div>
-
-  </div>
-</section>
-<!-- Portfolio section -->
-
-
-<section class="services-modern" id="services">
-
-  <div class="section-header-split">
-    <div class="header-left">
-      <div class="section-badge">
-        <span class="line"></span> My Expertise
-      </div>
-      <h2 class="heading-modern">Services I <span>Provide</span></h2>
-    </div>
-    <div class="header-right">
-      <a href="all-services.html" class="btn-primary view-all-btn">
-        View All Services <span class="play-icon"><i class='bx bx-right-arrow-alt'></i></span>
-      </a>
-    </div>
-  </div>
-
-  <div class="services-grid-modern">
-
-    <div class="service-card-futuristic">
-      <div class="service-icon-wrapper">
-        <i class='bx bx-code-alt'></i>
-      </div>
-      <h4>Full-Stack Development</h4>
-      <p>End-to-end web application development using the MERN stack (MongoDB, Express, React, Node.js). I build secure, scalable, and high-performing platforms tailored to your needs.</p>
-      <a href="#" class="service-link">Learn more <i class='bx bx-right-arrow-alt'></i></a>
-    </div>
-
-    <div class="service-card-futuristic">
-      <div class="service-icon-wrapper">
-        <i class='bx bxs-paint'></i>
-      </div>
-      <h4>UI/UX Integration</h4>
-      <p>Transforming complex ideas into intuitive, editorial-style interfaces. Proficient in modern CSS architectures and React to ensure a flawless experience.</p>
-      <a href="#" class="service-link">Learn more <i class='bx bx-right-arrow-alt'></i></a>
-    </div>
-
-    <div class="service-card-futuristic">
-      <div class="service-icon-wrapper">
-        <i class='bx bx-line-chart'></i>
-      </div>
-      <h4>Digital Strategy</h4>
-      <p>Implementing data-driven solutions and technical SEO practices to ensure your web applications perform optimally in search engine rankings.</p>
-      <a href="#" class="service-link">Learn more <i class='bx bx-right-arrow-alt'></i></a>
-    </div>
-
-  </div>
-</section>
-
-<!-- journey-modern section -->
-<section class="journey-modern" id="journey">
-    
-  <div class="section-header-centered">
-    <div class="section-badge" style="justify-content: center;">
-      <span class="line"></span> My Path
-    </div>
-    <h2 class="heading-modern" style="text-align: center;">My Academic & <br><span>Professional Journey</span></h2>
-  </div>
-
-  <div class="journey-grid">
-    
-    <div class="journey-column">
-      <div class="column-header">
-        <div class="icon-box"><i class='bx bxs-graduation'></i></div>
-        <h3>Education</h3>
-      </div>
-
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <span class="timeline-date">2023 - Present</span>
-            <h4 class="timeline-title">B.Sc. in Computer Science</h4>
-            <p class="timeline-subtitle">Daffodil International University</p>
-            <p class="timeline-text">Focusing on advanced algorithms, software engineering, and modern web architectures.</p>
+  <main id="main">
+    <section class="hero" id="home" aria-labelledby="hero-title" data-hero>
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <p class="hero-intro">
+            <img src="assets/asraf-avatar.jpg" alt="" width="44" height="44">
+            <span><strong>Asraf Alom</strong><small>UI designer &amp; full-stack developer</small></span>
+            <span class="availability"><span class="status-dot"></span> Available for projects</span>
+          </p>
+          <h1 id="hero-title">Sharp design.<br><span class="text-gradient">Solid code.</span></h1>
+          <p class="lead">I design and build websites and web apps from the first sketch to launch: the interface your customers see, and the engineering that keeps it fast and reliable.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#work">Explore my work <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow-right"/></svg></a>
+            <a class="button button-ghost" href="#contact">Start a project</a>
           </div>
+          <dl class="hero-stats" data-hero-stats hidden></dl>
         </div>
 
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <span class="timeline-date">2021 - 2023</span>
-            <h4 class="timeline-title">Higher Secondary Certificate</h4>
-            <p class="timeline-subtitle">Dhaka College</p>
-            <p class="timeline-text">Science group with a strong foundation in Mathematics and Physics.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+        <!--
+          3D showcase. Each .layer sits at a depth (--z) and bobs gently.
+          To feature different work, swap the screenshots and links below.
+        -->
+        <div class="hero-stage" data-hero-stage aria-hidden="true">
+          <div class="scene" data-scene>
+            <div class="layer l-grid"></div>
+            <div class="layer l-glow"></div>
 
-    <div class="journey-column">
-      <div class="column-header">
-        <div class="icon-box"><i class='bx bx-briefcase-alt-2'></i></div>
-        <h3>Experience</h3>
-      </div>
+            <a class="layer l-back" href="project.html?p=emrix" tabindex="-1" data-cursor="View project" style="--glow:#ef4444">
+              <div class="float">
+                <span class="window-tag"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#shirt"/></svg>Fashion · EMRIX</span>
+                <div class="browser">
+                  <div class="browser-bar"><i></i><i></i><i></i><span>emrixbd.vercel.app</span></div>
+                  <div class="browser-view"><img src="assets/work/emrix/home.jpg" alt="" decoding="async"></div>
+                </div>
+              </div>
+            </a>
 
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <span class="timeline-date">2024 - Present</span>
-            <h4 class="timeline-title">Full-Stack Developer</h4>
-            <p class="timeline-subtitle">Self-Employed / Freelance</p>
-            <p class="timeline-text">Developing end-to-end MERN stack solutions like "To-Let Pro", focusing on scalable backends and clean UI/UX.</p>
-          </div>
-        </div>
+            <a class="layer l-main" href="project.html?p=to-let-pro" tabindex="-1" data-cursor="View project" style="--glow:#f43f5e">
+              <div class="float">
+                <span class="window-tag"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#house"/></svg>Real estate · To-Let Pro</span>
+                <div class="browser">
+                  <div class="browser-bar"><i></i><i></i><i></i><span>toletpro.rent</span></div>
+                  <div class="browser-view"><img src="assets/work/to-let-pro/live-home.jpg" alt="" fetchpriority="high" decoding="async"></div>
+                </div>
+              </div>
+            </a>
 
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <span class="timeline-date">2023 - 2024</span>
-            <h4 class="timeline-title">Frontend Intern</h4>
-            <p class="timeline-subtitle">Tech Solutions BD</p>
-            <p class="timeline-text">Collaborated on building responsive dashboards using React and Tailwind CSS.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+            <a class="layer l-phone" href="project.html?p=nexgen-veterinary" tabindex="-1" data-cursor="View project" style="--glow:#f97316">
+              <div class="float">
+                <span class="window-tag"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#paw"/></svg>Pet care</span>
+                <div class="device-phone"><img src="assets/work/nexgen/mobile.jpg" alt="" decoding="async"></div>
+              </div>
+            </a>
 
-  </div>
-</section>
-
-<!-- all Services section -->
-
-
-
-<!-- contact section -->
-
-<section class="contact-cyber" id="contact">
-  <div class="cyber-grid-bg"></div>
-
-  <div class="contact-container">
-    
-    <div class="contact-header-cyber">
-      <div class="cyber-badge">
-        <i class='bx bx-radar bx-spin' style="color: #ba0036;"></i> SYSTEM.CONNECT //
-      </div>
-      <h2 class="heading-cyber">INITIATE <span>TRANSMISSION</span></h2>
-    </div>
-
-    <div class="cyber-split-layout">
-      <div class="cyber-info-panel">
-        
-        <div class="cyber-data-card">
-          <div class="cyber-icon"><i class='bx bx-target-lock'></i></div>
-          <div class="cyber-data">
-            <h5>[ COMM_LINK ]</h5>
-            <p>Asrafalommahin2@gmail.com</p>
-          </div>
-          <div class="cyber-corner-accent"></div>
-        </div>
-
-        <div class="cyber-data-card">
-          <div class="cyber-icon"><i class='bx bx-map-alt'></i></div>
-          <div class="cyber-data">
-            <h5>[ COORDINATES ]</h5>
-            <p>Dhaka, Bangladesh_ 23.8103° N</p>
-          </div>
-          <div class="cyber-corner-accent"></div>
-        </div>
-
-      </div>
-
-      <div class="cyber-form-wrapper">
-        <div class="cyber-frame-top"></div>
-        
-        <form id="contactForm" class="cyber-form">
-          <div class="cyber-input-group">
-            <div class="cyber-input-box">
-              <label>> IDENTIFICATION_NAME</label>
-              <input type="text" id="contactName" name="name" required>
+            <div class="layer l-design">
+              <div class="float">
+                <div class="design-card">
+                  <p class="card-label">Design system</p>
+                  <div class="swatches"><i style="--c:#7ee2b8"></i><i style="--c:#3fcf9b"></i><i style="--c:#6aa8ff"></i><i style="--c:#eef6f2"></i></div>
+                  <div class="type-sample"><strong>Aa</strong><span>Manrope<small>700 · 84 / 1.0</small></span></div>
+                  <div class="spacing-scale"><i style="--h:22%"></i><i style="--h:38%"></i><i style="--h:56%"></i><i style="--h:76%"></i><i style="--h:100%"></i></div>
+                </div>
+              </div>
             </div>
-            <div class="cyber-input-box">
-              <label>> NETWORK_ADDRESS</label>
-              <input type="email" id="contactEmail" name="email" required>
+
+            <div class="layer l-code">
+              <div class="float">
+                <div class="code-card">
+                  <div class="browser-bar"><i></i><i></i><i></i><span>ListingCard.jsx</span></div>
+<pre><code><span class="tk-k">export function</span> <span class="tk-f">ListingCard</span>({ home }) {
+  <span class="tk-k">return</span> (
+    <span class="tk-p">&lt;</span><span class="tk-t">Card</span> <span class="tk-a">elevated</span><span class="tk-p">&gt;</span>
+      <span class="tk-p">&lt;</span><span class="tk-t">Photo</span> <span class="tk-a">src</span>={home.cover} <span class="tk-p">/&gt;</span>
+      <span class="tk-p">&lt;</span><span class="tk-t">Price</span> <span class="tk-a">value</span>={home.rent} <span class="tk-p">/&gt;</span>
+    <span class="tk-p">&lt;/</span><span class="tk-t">Card</span><span class="tk-p">&gt;</span>
+  );
+}</code></pre>
+                </div>
+              </div>
             </div>
+
+            <div class="layer l-pill-a"><div class="float"><span class="pill-3d"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#code"/></svg>React · Node.js · MongoDB</span></div></div>
+            <div class="layer l-pill-b"><div class="float"><span class="pill-3d"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#phone"/></svg>Mobile-first</span></div></div>
           </div>
-          
-          <div class="cyber-input-box">
-            <label>> TRANSMISSION_SUBJECT</label>
-            <input type="text" id="contactSubject" name="subject" required>
+        </div>
+      </div>
+
+      <div class="stack-marquee" aria-label="Technologies I work with">
+        <div class="marquee-track" data-stack-marquee></div>
+      </div>
+    </section>
+
+    <section class="section work-section" id="work" aria-labelledby="work-title">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div><p class="eyebrow"><span class="section-dash"></span> Featured work</p><h2 id="work-title">The work speaks.<br><span class="text-gradient">Take a closer look.</span></h2></div>
+          <p>Real projects, real screens. Pick one to bring it forward, then open the case study to see how I built it.</p>
+        </div>
+        <!-- Rendered by js/script.js from the projects marked `featured` in js/projects.js. -->
+        <div class="reveal"><div class="spotlight" id="spotlight"></div></div>
+        <div class="reveal" id="see-all"></div>
+        <noscript><p class="noscript-note">Turn on JavaScript to browse projects, see <a href="work.html">all work</a>, or explore the code on <a href="https://github.com/mahingithub">GitHub</a>.</p></noscript>
+      </div>
+    </section>
+
+    <section class="section container" id="skills" aria-labelledby="skills-title">
+      <div class="section-heading reveal">
+        <div><p class="eyebrow"><span class="section-dash"></span> What I do</p><h2 id="skills-title">Design and development.<br><span class="text-gradient">One person.</span></h2></div>
+        <p>No hand-offs between a designer and a developer. The same person plans your interface and writes the code behind it, so nothing gets lost in between.</p>
+      </div>
+      <div class="cap-grid">
+        <article class="cap-card reveal" data-tilt="7" style="--c:#7ee2b8;--d:0">
+          <div class="cap-visual" aria-hidden="true"><div class="cap-stack"><span class="cap-layer"></span><span class="cap-layer"></span><span class="cap-layer"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#pen"/></svg></span></div></div>
+          <p class="cap-index">01</p>
+          <h3>UI &amp; UX design</h3>
+          <p>Interfaces that feel obvious to use: clear layouts, strong typography and the small interactions that make a product feel finished.</p>
+          <ul class="cap-tags"><li>Responsive layouts</li><li>Design systems</li><li>Accessibility</li></ul>
+          <a class="cap-proof" href="project.html?p=to-let-pro">See it in To-Let Pro <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow-right"/></svg></a>
+        </article>
+        <article class="cap-card reveal" data-tilt="7" style="--c:#6aa8ff;--d:1">
+          <div class="cap-visual" aria-hidden="true"><div class="cap-stack"><span class="cap-layer"></span><span class="cap-layer"></span><span class="cap-layer"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#code"/></svg></span></div></div>
+          <p class="cap-index">02</p>
+          <h3>Frontend development</h3>
+          <p>Fast, polished front ends built component by component, so they look sharp on every screen and stay easy to grow.</p>
+          <ul class="cap-tags"><li>React</li><li>Vite</li><li>Tailwind CSS</li><li>Zustand</li></ul>
+          <a class="cap-proof" href="project.html?p=my-wallet">See it in My Wallet <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow-right"/></svg></a>
+        </article>
+        <article class="cap-card reveal" data-tilt="7" style="--c:#b18cff;--d:2">
+          <div class="cap-visual" aria-hidden="true"><div class="cap-stack"><span class="cap-layer"></span><span class="cap-layer"></span><span class="cap-layer"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#server"/></svg></span></div></div>
+          <p class="cap-index">03</p>
+          <h3>Backend &amp; APIs</h3>
+          <p>The engine behind the screen: accounts, data, messaging and integrations, secured and ready to scale.</p>
+          <ul class="cap-tags"><li>Node.js</li><li>Express</li><li>MongoDB</li><li>Redis</li><li>Flask</li></ul>
+          <a class="cap-proof" href="project.html?p=to-let-pro">See the To-Let Pro API <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow-right"/></svg></a>
+        </article>
+        <article class="cap-card reveal" data-tilt="7" style="--c:#f5b44a;--d:3">
+          <div class="cap-visual" aria-hidden="true"><div class="cap-stack"><span class="cap-layer"></span><span class="cap-layer"></span><span class="cap-layer"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#bolt"/></svg></span></div></div>
+          <p class="cap-index">04</p>
+          <h3>Real-time &amp; mobile</h3>
+          <p>Live updates, push notifications and installable Android apps, built from the same codebase as the website.</p>
+          <ul class="cap-tags"><li>Socket.IO</li><li>Firebase</li><li>Capacitor</li><li>Chart.js</li></ul>
+          <a class="cap-proof" href="project.html?p=system-monitor">See the live dashboard <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow-right"/></svg></a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section container" id="industries" aria-labelledby="industries-title">
+      <div class="section-heading reveal">
+        <div><p class="eyebrow"><span class="section-dash"></span> Industries</p><h2 id="industries-title">Built for your industry.</h2></div>
+        <p>Every business sells differently. Choose yours to see the websites I’ve built for it and how each one works.</p>
+      </div>
+      <div class="industry-grid" id="industry-grid"></div>
+    </section>
+
+    <section class="services-section" id="services" aria-labelledby="services-title">
+      <div class="container section">
+        <div class="section-heading reveal">
+          <div><p class="eyebrow"><span class="section-dash"></span> Services</p><h2 id="services-title">What I can do for you.</h2></div>
+          <p>From your first impression online to the videos your audience remembers.</p>
+        </div>
+        <div class="services-grid">
+          <article class="service-card reveal" style="--d:0">
+            <img class="service-workspace-photo" src="assets/asraf-coding-workspace.jpg" alt="Asraf Alom at a computer with a code editor and website preview" width="1536" height="1024" loading="lazy" decoding="async">
+            <div class="service-top"><span class="service-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#code"/></svg></span><span>01 / Web development</span></div>
+            <h3>A website that works as hard as you do.</h3>
+            <p>Fast, responsive websites and custom web apps, designed around what your customers need to do and built to be easy to grow.</p>
+            <ul>
+              <li>Online stores for fashion & retail</li>
+              <li>Restaurant sites with menus & ordering</li>
+              <li>Property, booking & listing platforms</li>
+              <li>Dashboards, admin panels & web apps</li>
+              <li>Redesigns of existing websites</li>
+            </ul>
+            <div class="service-footer"><span>React · Node.js · MongoDB</span><a class="text-link" href="#contact" data-service="A business website">Discuss a website <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow-up-right"/></svg></a></div>
+          </article>
+          <article class="service-card reveal" style="--d:1">
+            <img class="service-workspace-photo" src="assets/asraf-editing-workspace.jpg" alt="Asraf Alom at a video editing workstation with a timeline on the monitor" width="1536" height="1024" loading="lazy" decoding="async">
+            <div class="service-top"><span class="service-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#film"/></svg></span><span>02 / Video editing</span></div>
+            <h3>Stories that hold your audience.</h3>
+            <p>Purposeful pacing, considered visuals and a strong narrative. I shape your footage into content people want to watch.</p>
+            <ul>
+              <li>Product & brand videos for your website</li>
+              <li>Social media reels & short-form edits</li>
+              <li>YouTube & long-form content</li>
+              <li>Color, sound & motion graphics</li>
+            </ul>
+            <div class="service-footer"><span>Premiere Pro · After Effects</span><a class="text-link" href="#contact" data-service="Video editing">Request editing samples <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow-up-right"/></svg></a></div>
+          </article>
+        </div>
+        <div class="included reveal">
+          <p>Every website includes</p>
+          <ul>
+            <li><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#phone"/></svg> Mobile-first, responsive design</li>
+            <li><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#spark"/></svg> Fast loading & SEO basics</li>
+            <li><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#mail"/></svg> Contact & enquiry forms</li>
+            <li><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#layers"/></svg> Launch & handover support</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section process-section container" id="process" aria-labelledby="process-title">
+      <div class="section-heading reveal">
+        <div><p class="eyebrow"><span class="section-dash"></span> How we’ll work together</p><h2 id="process-title">Good work. Clear process.</h2></div>
+        <p>You’ll always know what’s happening, what’s next and where we’re headed.</p>
+      </div>
+      <ol class="process-grid">
+        <li class="reveal" style="--d:0"><span class="step-number">01</span><h3>Understand</h3><p>We talk about your business, your customers and your goals, then agree on scope, timeline and price.</p></li>
+        <li class="reveal" style="--d:1"><span class="step-number">02</span><h3>Design</h3><p>I plan the pages and the look, using your brand and industry, and share it with you before building.</p></li>
+        <li class="reveal" style="--d:2"><span class="step-number">03</span><h3>Build & refine</h3><p>I build the site, share progress as I go, and fine-tune the details with your feedback.</p></li>
+        <li class="reveal" style="--d:3"><span class="step-number">04</span><h3>Launch</h3><p>Your site goes live with a clear handover, so you know how everything works and what comes next.</p></li>
+      </ol>
+    </section>
+
+    <section class="section about-section container" id="about" aria-labelledby="about-title">
+      <div class="about-visual reveal" data-tilt="8">
+        <div class="portrait-card portrait-card-photo">
+          <img class="hero-workspace-photo" src="assets/asraf-developer-portrait.jpg" alt="Portrait of Asraf Alom working at his laptop in a bright studio" width="1122" height="1402" loading="lazy" decoding="async">
+          <div class="portrait-caption"><span><strong>Asraf Alom</strong><small>Web developer. Creative partner.</small></span><span class="signature" aria-hidden="true">mahin.</span></div>
+        </div>
+        <div class="floating-label label-code" aria-hidden="true"><span class="mini-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#code"/></svg></span><span>Built with purpose<small>Web development</small></span></div>
+        <div class="floating-label label-video" aria-hidden="true"><span class="mini-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#film"/></svg></span><span>Edited to connect<small>Video editing</small></span></div>
+      </div>
+      <div class="about-copy reveal" style="--d:1">
+        <p class="eyebrow"><span class="section-dash"></span> The person behind the work</p>
+        <h2 id="about-title">A developer’s mind.<br><span class="text-gradient">A storyteller’s eye.</span></h2>
+        <p>I’m Asraf Alom, also known as Mahin. I help businesses show up online with clarity and confidence by combining design, development and an editor’s sense of story.</p>
+        <p>I care about how things work and how they make people feel. Whether it’s a clothing store, a restaurant menu or a property platform, I look for the details that make customers trust you and take the next step.</p>
+        <div class="about-values">
+          <div><strong>One point of contact.</strong><span>You work directly with the person doing the work.</span></div>
+          <div><strong>Your goals come first.</strong><span>Every design and technical decision has a clear purpose.</span></div>
+        </div>
+        <div class="about-footer">
+          <a class="text-link" href="Asraf_Alom_CV.pdf" download>Download my CV <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow-up-right"/></svg></a>
+          <p class="about-location"><span class="status-dot"></span> Dhaka, Bangladesh · Working with clients worldwide</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq-section container" aria-labelledby="faq-title">
+      <div class="reveal"><p class="eyebrow"><span class="section-dash"></span> Before we start</p><h2 id="faq-title">A few good questions.</h2></div>
+      <div class="faq-list reveal" style="--d:1">
+        <details><summary>Have you built websites for my kind of business?<span aria-hidden="true">+</span></summary><p>Browse the <a href="work.html">work by industry</a> to see projects close to yours. Every project page shows the brief, how it was built and the final screens. If your industry isn’t listed yet, tell me about it. Most of what makes a site work carries across sectors.</p></details>
+        <details><summary>What do you need to get started?<span aria-hidden="true">+</span></summary><p>A short description of your business, your goals, and any websites you like. Existing content, photos and branding help. For video, your footage and preferred format are a good starting point.</p></details>
+        <details><summary>How much will my project cost?<span aria-hidden="true">+</span></summary><p>It depends on the scope, number of pages and features. Once we’ve discussed your brief, I’ll send a clear quote so you know exactly what’s included before we begin.</p></details>
+        <details><summary>Can we work together remotely?<span aria-hidden="true">+</span></summary><p>Yes. I’m based in Dhaka and work with clients remotely. We agree on how often we check in, and you can review progress and share feedback online.</p></details>
+        <details><summary>Can you help with both my website and videos?<span aria-hidden="true">+</span></summary><p>Absolutely. We can plan both as one project, keeping the visual direction and messaging consistent across your website and video content.</p></details>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contact" aria-labelledby="contact-title">
+      <div class="container contact-grid">
+        <div class="contact-copy reveal">
+          <p class="eyebrow"><span class="status-dot"></span> Let’s make something good</p>
+          <h2 id="contact-title">Your next big idea.<br><span class="text-gradient">Let’s bring it to life.</span></h2>
+          <p>Message me whichever way suits you. Show me a project you like, here or anywhere on the web, and I’ll tell you how I’d build a premium version for your business.</p>
+          <!-- Rendered by js/script.js from your details in js/contact.js. -->
+          <ul class="channels" id="contact-channels" aria-label="Ways to reach me"></ul>
+          <noscript><p class="contact-note">Email me at <a href="mailto:mahinasrafalom@gmail.com">mahinasrafalom@gmail.com</a>.</p></noscript>
+        </div>
+
+        <!--
+          Project brief: visitors tap their answers and the message writes itself.
+          It can go out on WhatsApp or be sent from here (POST /api/contact).
+        -->
+        <form id="contactForm" class="contact-form brief reveal" style="--d:1" action="/api/contact" method="post" novalidate>
+          <div class="brief-head">
+            <img src="assets/asraf-avatar.jpg" alt="" width="44" height="44">
+            <p><strong>Plan your project</strong><span>Tap your answers. It takes about a minute.</span></p>
+            <p class="brief-count" aria-live="polite"><span id="briefDone">0</span> / 4</p>
           </div>
-          
-          <div class="cyber-input-box">
-            <label>> DATA_PAYLOAD</label>
-            <textarea id="contactMessage" name="message" rows="5" required></textarea>
+          <div class="brief-meter" aria-hidden="true"><i></i></div>
+
+          <fieldset class="brief-step" data-step="need">
+            <legend><span class="brief-num">1</span>What do you need?</legend>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="need" value="A business website"><span>Business website</span></label>
+              <label class="choice"><input type="radio" name="need" value="An online store"><span>Online store</span></label>
+              <label class="choice"><input type="radio" name="need" value="A web app or dashboard"><span>Web app or dashboard</span></label>
+              <label class="choice"><input type="radio" name="need" value="A redesign of my website"><span>Redesign my site</span></label>
+              <label class="choice"><input type="radio" name="need" value="Video editing"><span>Video editing</span></label>
+              <label class="choice"><input type="radio" name="need" value="Something else"><span>Something else</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="brief-step" data-step="ref">
+            <legend><span class="brief-num">2</span>Seen something you like?</legend>
+            <p class="brief-hint">Pick one of my projects, or share a link to any website you like.</p>
+            <div class="refs" id="briefRefs"></div>
+            <div class="field brief-url" hidden>
+              <label for="briefUrl">Link to the website you like</label>
+              <input type="url" id="briefUrl" name="refUrl" inputmode="url" placeholder="https://…" maxlength="300">
+            </div>
+            <div class="brief-level" hidden>
+              <p class="brief-hint">How close should yours be?</p>
+              <div class="choices">
+                <label class="choice"><input type="radio" name="level" value="premium" checked><span>A premium upgrade</span></label>
+                <label class="choice"><input type="radio" name="level" value="similar"><span>Something similar</span></label>
+                <label class="choice"><input type="radio" name="level" value="inspiration"><span>Just inspiration</span></label>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="brief-step" data-step="timeline">
+            <legend><span class="brief-num">3</span>When do you need it?</legend>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="timeline" value="As soon as possible"><span>As soon as possible</span></label>
+              <label class="choice"><input type="radio" name="timeline" value="Within a month"><span>Within a month</span></label>
+              <label class="choice"><input type="radio" name="timeline" value="In 2–3 months"><span>In 2–3 months</span></label>
+              <label class="choice"><input type="radio" name="timeline" value="I’m flexible"><span>I’m flexible</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="brief-step" data-step="you">
+            <legend><span class="brief-num">4</span>Where should I reply?</legend>
+            <div class="form-row">
+              <div class="field"><label for="contactName">Your name</label><input type="text" id="contactName" name="name" autocomplete="name" placeholder="Alex Taylor" maxlength="100"></div>
+              <div class="field"><label for="contactReach">WhatsApp, phone or email</label><input type="text" id="contactReach" name="reach" autocomplete="on" placeholder="e.g. 01712-345678" maxlength="254"></div>
+            </div>
+            <div class="field"><label for="contactMessage">Anything else? <small>Optional</small></label><textarea id="contactMessage" name="details" rows="3" maxlength="4000" placeholder="Your business, the pages or features you have in mind, your budget…"></textarea></div>
+          </fieldset>
+
+          <div class="brief-preview">
+            <p class="brief-hint">Your message</p>
+            <p class="brief-bubble" id="briefPreview"></p>
           </div>
-          
-          <button type="submit" class="cyber-btn" id="contactSubmitBtn">
-            TRANSMIT_DATA <i class='bx bx-wifi'></i>
-          </button>
-          
-          <p id="formStatus" class="cyber-status-text"></p>
+
+          <div class="brief-actions">
+            <a class="button button-primary" id="briefWhatsApp" href="#" target="_blank" rel="noopener noreferrer" hidden><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#whatsapp"/></svg>Send on WhatsApp</a>
+            <button class="button button-ghost" type="submit" id="contactSubmitBtn"><span>Send from here</span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow-up-right"/></svg></button>
+          </div>
+          <p class="form-note" id="briefNote">Your details are only used to reply to you.</p>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+          <noscript><p>Please email <a href="mailto:mahinasrafalom@gmail.com">mahinasrafalom@gmail.com</a> to discuss your project.</p></noscript>
         </form>
-
-        <div class="cyber-frame-bottom"></div>
       </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-top">
+      <a class="brand" href="#home"><span class="brand-mark" aria-hidden="true">m<span>.</span></span><span>mahin<span class="brand-dot">.</span></span></a>
+      <p>Made with purpose. Down to the last detail.</p>
+      <div><a href="work.html">All work</a><a href="https://github.com/mahingithub" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a><a href="mailto:mahinasrafalom@gmail.com">Email <span aria-hidden="true">↗</span></a></div>
     </div>
-
-  </div>
-</section>
-
-<footer class="footer-cyber">
-  <div class="footer-grid">
-    
-    <div class="footer-brand">
-      <a href="#" class="logo-cyber">MAHIN<span>.</span></a>
-      <p>MERN Stack Innovator. Building high-performance, futuristic web applications and UI designs from Dhaka, BD.</p>
-      <div class="footer-socials">
-        <a href="#"><i class='bx bxl-github'></i></a>
-        <a href="#"><i class='bx bxl-linkedin'></i></a>
-        <a href="#"><i class='bx bxl-twitter'></i></a>
-        <a href="#"><i class='bx bxl-youtube'></i></a>
-      </div>
-    </div>
-
-    <div class="footer-links">
-      <h4>// DIRECTORIES</h4>
-      <ul>
-        <li><a href="#home">> System_Home</a></li>
-        <li><a href="#about">> About_Me</a></li>
-        <li><a href="#services">> Services</a></li>
-        <li><a href="#portfolio">> Projects</a></li>
-      </ul>
-    </div>
-
-  </div>
-
-  <div class="footer-bottom">
-    <p class="cyber-copyright">
-      &copy; 2024 ASRAF ALOM MAHIN. <span class="status">[ ALL SYSTEMS ONLINE ]</span>
-    </p>
-    
-    <div class="footer-iconTop">
-      <a href="#home" class="btn-top" title="Return to Top">
-        <i class='bx bx-chevron-up'></i>
-      </a>
-    </div>
-  </div>
-</footer>
-
-<!-- scrollreveal -->
-
-<!-- <script src="https://unpkg.com/scrollreveal"></script> -->
-
-<script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-<script src="js/script.js"></script>
+    <div class="container footer-bottom"><span>© <span id="copyright-year">2026</span> Asraf Alom. All rights reserved.</span><span>UI design, web development & video editing · Dhaka, Bangladesh</span></div>
+  </footer>
 </body>
 </html>

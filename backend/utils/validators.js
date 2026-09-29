@@ -14,11 +14,24 @@ const contactValidationRules = [
     .isLength({ min: 2, max: 100 }).withMessage('Name must be 2-100 characters')
     .escape(), // Sanitize to prevent XSS
 
+  // Visitors can leave an email address, a phone/WhatsApp number, or both.
   body('email')
+    .optional({ values: 'falsy' })
     .trim()
-    .notEmpty().withMessage('Email is required')
     .isEmail().withMessage('Please provide a valid email address')
     .normalizeEmail(),
+
+  body('phone')
+    .optional({ values: 'falsy' })
+    .trim()
+    .matches(/^\+?[\d\s().-]{7,20}$/).withMessage('Please provide a valid phone number'),
+
+  body().custom((value, { req }) => {
+    if (!req.body.email && !req.body.phone) {
+      throw new Error('Please provide an email address or a phone number');
+    }
+    return true;
+  }),
 
   body('subject')
     .trim()

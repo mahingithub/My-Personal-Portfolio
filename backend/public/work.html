@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#070d0c">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Websites, web apps and independent UI concepts by Asraf Alom, organized by industry. Explore project details and design previews.">
+  <meta property="og:title" content="Work by industry · Asraf Alom">
+  <meta property="og:type" content="website">
+  <title>Work by industry · Asraf Alom</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/portfolio.css">
+  <link rel="stylesheet" href="css/motion.css">
+  <link rel="stylesheet" href="css/contact.css">
+  <script>
+    (function (root) {
+      root.classList.add('js');
+      // Page transition: the page you came from leaves a note, so this one can reveal itself (see js/script.js).
+      try {
+        var note = JSON.parse(sessionStorage.getItem('pt'));
+        sessionStorage.removeItem('pt');
+        if (note && Date.now() - note.at < 4000 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          root.classList.add('pt-in');
+          root.dataset.ptLabel = String(note.label || '');
+          if (/^#[\da-f]{3,8}$/i.test(note.color)) root.style.setProperty('--pt-color', note.color);
+        }
+      } catch (error) {}
+    })(document.documentElement);
+  </script>
+  <script src="js/projects.js" defer></script>
+  <script src="js/contact.js" defer></script>
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html" aria-label="Mahin, home"><span class="brand-mark" aria-hidden="true">m<span>.</span></span><span>mahin<span class="brand-dot">.</span></span></a>
+      <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+        <a href="work.html" class="active" aria-current="page">Work</a><a href="index.html#skills">Skills</a><a href="index.html#industries">Industries</a><a href="index.html#services">Services</a><a href="index.html#about">About</a>
+      </nav>
+      <a class="button button-primary nav-cta" href="index.html#contact">Start a project <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow-up-right"/></svg></a>
+      <button class="menu-toggle" type="button" aria-label="Open navigation" aria-controls="main-nav" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero container" aria-labelledby="page-title">
+      <p class="eyebrow"><span class="section-dash"></span> Work by industry</p>
+      <h1 id="page-title">Different industries.<br><span class="text-gradient">Same attention to detail.</span></h1>
+      <p class="lead">Live projects and independent UI concepts, each shaped around a different business. Choose an industry, explore the screens, and find a direction for your next website.</p>
+    </section>
+
+    <nav class="jump-nav" aria-label="Industries">
+      <div class="container"><ul id="jump-links"></ul></div>
+    </nav>
+
+    <div class="container" id="work-catalog"></div>
+    <noscript><p class="container noscript-note">Turn on JavaScript to browse projects, or explore the code on <a href="https://github.com/mahingithub">GitHub</a>.</p></noscript>
+
+    <section class="container cta-band reveal" aria-labelledby="cta-title">
+      <div>
+        <p class="eyebrow"><span class="status-dot"></span> Don’t see your industry?</p>
+        <h2 id="cta-title">Let’s build the first one together.</h2>
+        <p>The fundamentals of a site that sells carry across every sector. Tell me about your business and I’ll show you what I’d build.</p>
+      </div>
+      <a class="button button-primary" href="index.html#contact">Start a project <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow-up-right"/></svg></a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-top">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">m<span>.</span></span><span>mahin<span class="brand-dot">.</span></span></a>
+      <p>Made with purpose. Down to the last detail.</p>
+      <div><a href="index.html">Home</a><a href="https://github.com/mahingithub" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a><a href="mailto:mahinasrafalom@gmail.com">Email <span aria-hidden="true">↗</span></a></div>
+    </div>
+    <div class="container footer-bottom"><span>© <span id="copyright-year">2026</span> Asraf Alom. All rights reserved.</span><span>UI design, web development & video editing · Dhaka, Bangladesh</span></div>
+  </footer>
+</body>
+</html>

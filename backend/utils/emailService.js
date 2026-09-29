@@ -19,6 +19,11 @@ const createTransporter = () => {
   });
 };
 
+// Name and subject are escaped by the validator; the message and phone number are not.
+const escapeHtml = (value = '') => String(value).replace(/[&<>"']/g, (char) => ({
+  '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+})[char]);
+
 /**
  * Send email notification when a new contact message is received
  * @param {Object} contact - The contact form data
@@ -33,6 +38,15 @@ const sendContactNotification = async (contact) => {
     }
 
     const transporter = createTransporter();
+
+    // Reply the way the visitor asked: by email if they gave one, otherwise on WhatsApp.
+    // Local Bangladeshi numbers (01…) get the 880 country code WhatsApp needs.
+    const phoneDigits = (contact.phone || '').replace(/\D/g, '');
+    const whatsappNumber = phoneDigits.startsWith('0') ? `88${phoneDigits}` : phoneDigits;
+    const replyUrl = contact.email
+      ? `mailto:${contact.email}?subject=${encodeURIComponent(`Re: ${contact.subject}`)}`
+      : `https://wa.me/${whatsappNumber}`;
+    const replyLabel = contact.email ? 'Reply by email →' : 'Reply on WhatsApp →';
 
     const mailOptions = {
       from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
@@ -64,6 +78,7 @@ const sendContactNotification = async (contact) => {
               </p>
             </div>
 
+            ${contact.email ? `
             <!-- Email -->
             <div style="margin-bottom: 20px;">
               <label style="color: #0ef; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">
@@ -72,7 +87,20 @@ const sendContactNotification = async (contact) => {
               <p style="color: #ffffff; font-size: 16px; margin: 6px 0 0; padding: 12px; background: #1a1a2e; border-radius: 8px; border-left: 3px solid #0ef;">
                 <a href="mailto:${contact.email}" style="color: #0ef; text-decoration: none;">${contact.email}</a>
               </p>
-            </div>
+            </div>` : ''}
+
+            ${contact.phone ? `
+            <!-- Phone / WhatsApp -->
+            <div style="margin-bottom: 20px;">
+              <label style="color: #0ef; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">
+                📱 Phone / WhatsApp
+              </label>
+              <p style="color: #ffffff; font-size: 16px; margin: 6px 0 0; padding: 12px; background: #1a1a2e; border-radius: 8px; border-left: 3px solid #0ef;">
+                ${escapeHtml(contact.phone)} ·
+                <a href="https://wa.me/${whatsappNumber}" style="color: #0ef; text-decoration: none;">WhatsApp</a> ·
+                <a href="tel:${escapeHtml(contact.phone.replace(/[^\d+]/g, ''))}" style="color: #0ef; text-decoration: none;">Call</a>
+              </p>
+            </div>` : ''}
 
             <!-- Subject -->
             <div style="margin-bottom: 20px;">
@@ -90,15 +118,15 @@ const sendContactNotification = async (contact) => {
                 💬 Message
               </label>
               <p style="color: #ffffff; font-size: 16px; margin: 6px 0 0; padding: 16px; background: #1a1a2e; border-radius: 8px; border-left: 3px solid #0ef; line-height: 1.6; white-space: pre-wrap;">
-${contact.message}
+${escapeHtml(contact.message)}
               </p>
             </div>
 
             <!-- Reply Button -->
             <div style="text-align: center; margin-top: 30px;">
-              <a href="mailto:${contact.email}?subject=Re: ${contact.subject}" 
+              <a href="${replyUrl}"
                  style="display: inline-block; padding: 14px 40px; background: linear-gradient(135deg, #0ef 0%, #0066ff 100%); color: #0a0a0a; text-decoration: none; border-radius: 8px; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">
-                Reply Now →
+                ${replyLabel}
               </a>
             </div>
           </div>

@@ -16,15 +16,20 @@ const contactSchema = new mongoose.Schema(
       minlength: [2, 'Name must be at least 2 characters'],
       maxlength: [100, 'Name cannot exceed 100 characters'],
     },
+    // An email address, a phone/WhatsApp number, or both (checked below).
     email: {
       type: String,
-      required: [true, 'Email is required'],
       trim: true,
       lowercase: true,
       match: [
         /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
         'Please provide a valid email address',
       ],
+    },
+    phone: {
+      type: String,
+      trim: true,
+      match: [/^\+?[\d\s().-]{7,20}$/, 'Please provide a valid phone number'],
     },
     subject: {
       type: String,
@@ -53,6 +58,14 @@ const contactSchema = new mongoose.Schema(
     timestamps: true, // Adds createdAt and updatedAt automatically
   }
 );
+
+// There has to be some way to reply
+contactSchema.pre('validate', function requireReplyChannel(next) {
+  if (!this.email && !this.phone) {
+    this.invalidate('email', 'Please provide an email address or a phone number');
+  }
+  next();
+});
 
 // Index for sorting by latest messages
 contactSchema.index({ createdAt: -1 });

@@ -12,12 +12,13 @@ const { appendToSheet, deleteFromSheet } = require('../config/googleSheets');
  */
 const submitContact = async (req, res) => {
   try {
-    const { name, email, subject, message } = req.body;
+    const { name, email, phone, subject, message } = req.body;
 
     // 1. Save to MongoDB (primary storage)
     const contact = await Contact.create({
       name,
-      email,
+      email: email || undefined,
+      phone: phone || undefined,
       subject,
       message,
       ip: req.ip,
@@ -86,6 +87,7 @@ const getAllMessages = async (req, res) => {
       filter.$or = [
         { name: { $regex: req.query.search, $options: 'i' } },
         { email: { $regex: req.query.search, $options: 'i' } },
+        { phone: { $regex: req.query.search, $options: 'i' } },
         { subject: { $regex: req.query.search, $options: 'i' } },
       ];
     }
