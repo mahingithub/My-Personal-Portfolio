@@ -341,6 +341,48 @@
     industryGrid.innerHTML = cards.join('');
     const total = cards.length;
     industryGrid.style.setProperty('--cols', total <= 4 ? total : total % 4 === 0 ? 4 : 3);
+    
+        // Futuristic Auto-scroll
+    let scrollSpeed = 0.5;
+    let accumulatedScroll = 0;
+    let autoScrollReq;
+    
+    function startAutoScroll() {
+        if (autoScrollReq) return;
+        function step() {
+            accumulatedScroll += scrollSpeed;
+            if (Math.abs(accumulatedScroll) >= 1) {
+                let pixels = Math.sign(accumulatedScroll) * Math.floor(Math.abs(accumulatedScroll));
+                industryGrid.scrollLeft += pixels;
+                accumulatedScroll -= pixels;
+            }
+            
+            if(industryGrid.scrollLeft >= (industryGrid.scrollWidth - industryGrid.clientWidth - 1)) {
+                scrollSpeed = -0.5; // Reverse
+            } else if (industryGrid.scrollLeft <= 0) {
+                scrollSpeed = 0.5; // Forward
+            }
+            autoScrollReq = requestAnimationFrame(step);
+        }
+        autoScrollReq = requestAnimationFrame(step);
+    }
+    
+    function stopAutoScroll() {
+        if (autoScrollReq) {
+            cancelAnimationFrame(autoScrollReq);
+            autoScrollReq = null;
+        }
+    }
+
+    startAutoScroll();
+
+    industryGrid.addEventListener('mouseenter', stopAutoScroll);
+    industryGrid.addEventListener('mouseleave', startAutoScroll);
+    industryGrid.addEventListener('touchstart', stopAutoScroll, {passive: true});
+    industryGrid.addEventListener('touchend', () => {
+        setTimeout(startAutoScroll, 3000); // Resume after 3s of no touch
+    });
+
   }
 
   /* ---------------------------------------------------------------------
@@ -1349,3 +1391,23 @@
     });
   }
 })();
+
+    // Vertical marquee for cap-grid on mobile
+    const capGrid = document.querySelector('.cap-grid');
+    if (capGrid && window.innerWidth <= 960 && !capGrid.classList.contains('marquee-initialized')) {
+        capGrid.classList.add('marquee-initialized');
+        const cards = Array.from(capGrid.children);
+        const inner = document.createElement('div');
+        inner.className = 'cap-marquee-inner';
+        
+        // Append original cards
+        cards.forEach(card => inner.appendChild(card));
+        
+        // Duplicate cards for seamless loop
+        cards.forEach(card => {
+            const clone = card.cloneNode(true);
+            inner.appendChild(clone);
+        });
+        
+        capGrid.appendChild(inner);
+    }

@@ -1161,12 +1161,23 @@ h2 {
 /* Industries ------------------------------------------------------------- */
 
 .industry-grid {
-  display:grid;
-  grid-template-columns:repeat(var(--cols,3),minmax(0,1fr));
-  gap:16px;
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 1rem 0 3rem;
+  margin: 0 -1rem; /* Full bleed on mobile */
+  padding-left: 1rem;
+  padding-right: 1rem;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
 }
+.industry-grid::-webkit-scrollbar { display: none; }
 
 .industry-card {
+  flex: 0 0 85%;
+  max-width: 400px;
   position:relative;
   display:flex;
   flex-direction:column;
@@ -3308,9 +3319,7 @@ h2 {
   .work-card.is-featured .work-body {
     padding-top:26px;
   }
-  .industry-grid {
-    grid-template-columns:1fr 1fr;
-  }
+  
   .services-grid {
     grid-template-columns:1fr;
   }
@@ -3383,9 +3392,7 @@ h2 {
     width:calc(100% + 40px);
     margin-inline:-20px;
   }
-  .cap-grid,.industry-grid {
-    grid-template-columns:1fr;
-  }
+  .cap-grid,
   .industry-card {
     min-height:0;
   }
@@ -3579,5 +3586,52 @@ h2 {
   }
   .marquee-track ul[aria-hidden] {
     display:none;
+  }
+}
+
+@media (min-width: 768px) {
+  .industry-grid { margin: 0; padding-left: 0; padding-right: 0; }
+  .industry-card { flex: 0 0 45%; }
+}
+@media (min-width: 1024px) {
+  .industry-card { flex: 0 0 30%; }
+}
+
+
+
+@media (max-width: 960px) {
+  .cap-card:before {
+    opacity: 0.5; /* Always show a subtle futuristic glow on mobile */
+  }
+}
+
+@keyframes vertical-scroll-loop {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+@media (max-width: 960px) {
+  .cap-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 500px;
+    overflow: hidden;
+    position: relative;
+    margin: 0 -20px;
+    padding: 0 20px;
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+  }
+  
+  .cap-marquee-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    animation: vertical-scroll-loop 15s linear infinite;
+  }
+  
+  .cap-card {
+    min-height: 280px;
   }
 }
