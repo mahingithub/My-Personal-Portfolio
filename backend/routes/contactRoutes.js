@@ -17,16 +17,8 @@ const {
 const { contactLimiter } = require('../middleware/rateLimiter');
 const adminAuth = require('../middleware/adminAuth');
 const { contactValidationRules, validate } = require('../utils/validators');
-const { isDBConnected } = require('../config/db');
-
 // Admin pages read saved messages, so they need the database.
-const requireDB = (req, res, next) => {
-  if (isDBConnected()) return next();
-  res.status(503).json({
-    success: false,
-    message: 'The database is not connected. Check MONGODB_URI on the server; new briefs are still emailed.',
-  });
-};
+const { requireDB } = require('../config/db');
 
 // ──────────────────────────────────────────────
 // PUBLIC ROUTES

@@ -44,7 +44,7 @@
     <div class="container nav-inner">
       <a class="brand" href="#home" aria-label="Mahin, back to top"><span class="brand-mark" aria-hidden="true">m<span>.</span></span><span>mahin<span class="brand-dot">.</span></span></a>
       <nav class="main-nav" id="main-nav" aria-label="Main navigation">
-        <a href="#work">Work</a><a href="#skills">Skills</a><a href="#industries">Industries</a><a href="#services">Services</a><a href="#about">About</a>
+        <a href="#work">Work</a><a href="#videos">Videos</a><a href="#skills">Skills</a><a href="#industries">Industries</a><a href="#services">Services</a><a href="#about">About</a>
       </nav>
       <a class="button button-primary nav-cta" href="#contact">Start a project <svg class="icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow-up-right"/></svg></a>
       <button class="menu-toggle" type="button" aria-label="Open navigation" aria-controls="main-nav" aria-expanded="false"><span></span><span></span></button>
@@ -155,6 +155,15 @@
         <div class="reveal" id="see-all"></div>
         <noscript><p class="noscript-note">Turn on JavaScript to browse projects, see <a href="work.html">all work</a>, or explore the code on <a href="https://github.com/mahingithub">GitHub</a>.</p></noscript>
       </div>
+    </section>
+
+    <section class="section container" id="videos" aria-labelledby="videos-title">
+      <div class="section-heading reveal">
+        <div><p class="eyebrow"><span class="section-dash"></span> Watch</p><h2 id="videos-title">See the work<br><span class="text-gradient">in motion.</span></h2></div>
+        <p>Walkthroughs, product films and promo reels, made for clients and for Mahin Studio. Tap any video to play it.</p>
+      </div>
+      <!-- Rendered by js/script.js from `videos` in js/projects.js. -->
+      <div class="video-rail reveal" id="video-rail"></div>
     </section>
 
     <section class="section container" id="skills" aria-labelledby="skills-title">
@@ -315,194 +324,6 @@
         <details><summary>How much will my project cost?<span aria-hidden="true">+</span></summary><p>It depends on the scope, number of pages and features. Once we’ve discussed your brief, I’ll send a clear quote so you know exactly what’s included before we begin.</p></details>
         <details><summary>Can we work together remotely?<span aria-hidden="true">+</span></summary><p>Yes. I’m based in Dhaka and work with clients remotely. We agree on how often we check in, and you can review progress and share feedback online.</p></details>
         <details><summary>Can you help with both my website and videos?<span aria-hidden="true">+</span></summary><p>Absolutely. We can plan both as one project, keeping the visual direction and messaging consistent across your website and video content.</p></details>
-      </div>
-    </section>
-
-    
-    <section class="testimonials-section" id="testimonials" aria-labelledby="testimonials-title">
-      <div class="container">
-        <style>
-          .testimonials-section { padding: 4rem 0; overflow: hidden; }
-          .testimonials-header { text-align: center; margin-bottom: 3rem; }
-          .testimonials-header .eyebrow { display: inline-block; border: 1px solid var(--border-color, #333); padding: 0.25rem 1rem; border-radius: 999px; font-size: 0.875rem; margin-bottom: 1rem; }
-          .testimonials-title { font-size: 2.5rem; font-weight: bold; margin-bottom: 1rem; }
-          
-          .testimonials-grid { 
-            display: flex; gap: 1.5rem; justify-content: center; height: 740px; overflow: hidden;
-            -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
-            mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
-          }
-          .testimonial-col { display: flex; flex-direction: column; gap: 1.5rem; }
-          
-          @keyframes scroll-up {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-50%); }
-          }
-          .animate-scroll-1 { animation: scroll-up 15s linear infinite; }
-          .animate-scroll-2 { animation: scroll-up 19s linear infinite; display: none; }
-          .animate-scroll-3 { animation: scroll-up 17s linear infinite; display: none; }
-          
-          @media (min-width: 768px) { .animate-scroll-2 { display: flex; } }
-          @media (min-width: 1024px) { .animate-scroll-3 { display: flex; } }
-
-          .testimonial-card {
-            background: var(--surface-bg, #111);
-            border: 1px solid var(--border-color, #333);
-            border-radius: 1.5rem;
-            padding: 2rem;
-            width: 320px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-          }
-          .testimonial-text { font-size: 0.875rem; line-height: 1.5; margin-bottom: 1.25rem; color: var(--text-muted, #999); }
-          .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
-          .testimonial-author img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
-          .testimonial-author-info { display: flex; flex-direction: column; }
-          .testimonial-name { font-weight: 500; font-size: 0.875rem; color: var(--text-color, #fff); }
-          .testimonial-role { font-size: 0.75rem; color: var(--text-muted, #999); }
-        </style>
-
-        <div class="testimonials-header reveal">
-          <div class="eyebrow"><span class="status-dot"></span> Testimonials</div>
-          <h2 class="testimonials-title" id="testimonials-title">What our <span class="text-gradient">clients say</span></h2>
-          <p style="color: var(--text-muted, #999)">See how we've helped businesses achieve their goals.</p>
-        </div>
-
-        <div class="testimonials-grid reveal" style="--d:1">
-          <!-- Column 1 -->
-          <div class="testimonial-col animate-scroll-1">
-            <div class="testimonial-card">
-              <div class="testimonial-text">"Working with them on our cosmetics shop was a fantastic experience. The new platform handles our inventory flawlessly and our online sales have doubled since launch!"</div>
-              <div class="testimonial-author">
-                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face" alt="Mei Lin">
-                <div class="testimonial-author-info">
-                  <span class="testimonial-name">Mei Lin</span>
-                  <span class="testimonial-role">Owner, Singapore Cosmetics</span>
-                </div>
-              </div>
-            </div>
-            <div class="testimonial-card">
-              <div class="testimonial-text">"Implementing this new digital solution was smooth and quick. The customizable, user-friendly interface made team training effortless."</div>
-              <div class="testimonial-author">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Bilal Ahmed">
-                <div class="testimonial-author-info">
-                  <span class="testimonial-name">Bilal Ahmed</span>
-                  <span class="testimonial-role">IT Director</span>
-                </div>
-              </div>
-            </div>
-            <!-- Repeat -->
-            <div class="testimonial-card">
-              <div class="testimonial-text">"Working with them on our cosmetics shop was a fantastic experience. The new platform handles our inventory flawlessly and our online sales have doubled since launch!"</div>
-              <div class="testimonial-author">
-                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face" alt="Mei Lin">
-                <div class="testimonial-author-info">
-                  <span class="testimonial-name">Mei Lin</span>
-                  <span class="testimonial-role">Owner, Singapore Cosmetics</span>
-                </div>
-              </div>
-            </div>
-            <div class="testimonial-card">
-              <div class="testimonial-text">"Implementing this new digital solution was smooth and quick. The customizable, user-friendly interface made team training effortless."</div>
-              <div class="testimonial-author">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Bilal Ahmed">
-                <div class="testimonial-author-info">
-                  <span class="testimonial-name">Bilal Ahmed</span>
-                  <span class="testimonial-role">IT Director</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Column 2 -->
-          <div class="testimonial-col animate-scroll-2">
-            <div class="testimonial-card">
-              <div class="testimonial-text">"The To-Let platform was delivered exactly as we envisioned. It's incredibly user-friendly for property owners and tenants alike, streamlining our entire booking process."</div>
-              <div class="testimonial-author">
-                <img src="https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?w=150&h=150&fit=crop&crop=face" alt="Tariq Rahman">
-                <div class="testimonial-author-info">
-                  <span class="testimonial-name">Tariq Rahman</span>
-                  <span class="testimonial-role">Founder, To-Let</span>
-                </div>
-              </div>
-            </div>
-            <div class="testimonial-card">
-              <div class="testimonial-text">"The support team is exceptional, guiding us through setup and providing ongoing assistance, ensuring our complete satisfaction."</div>
-              <div class="testimonial-author">
-                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face" alt="Saman Malik">
-                <div class="testimonial-author-info">
-                  <span class="testimonial-name">Saman Malik</span>
-                  <span class="testimonial-role">Customer Success Lead</span>
-                </div>
-              </div>
-            </div>
-             <!-- Repeat -->
-            <div class="testimonial-card">
-              <div class="testimonial-text">"The To-Let platform was delivered exactly as we envisioned. It's incredibly user-friendly for property owners and tenants alike, streamlining our entire booking process."</div>
-              <div class="testimonial-author">
-                <img src="https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?w=150&h=150&fit=crop&crop=face" alt="Tariq Rahman">
-                <div class="testimonial-author-info">
-                  <span class="testimonial-name">Tariq Rahman</span>
-                  <span class="testimonial-role">Founder, To-Let</span>
-                </div>
-              </div>
-            </div>
-            <div class="testimonial-card">
-              <div class="testimonial-text">"The support team is exceptional, guiding us through setup and providing ongoing assistance, ensuring our complete satisfaction."</div>
-              <div class="testimonial-author">
-                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face" alt="Saman Malik">
-                <div class="testimonial-author-info">
-                  <span class="testimonial-name">Saman Malik</span>
-                  <span class="testimonial-role">Customer Success Lead</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Column 3 -->
-          <div class="testimonial-col animate-scroll-3">
-            <div class="testimonial-card">
-              <div class="testimonial-text">"The MDIX project required complex integrations, and the team delivered beyond our expectations. The system is robust, secure, and has greatly improved our operational efficiency."</div>
-              <div class="testimonial-author">
-                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face" alt="Sarah Jenkins">
-                <div class="testimonial-author-info">
-                  <span class="testimonial-name">Sarah Jenkins</span>
-                  <span class="testimonial-role">Project Lead, MDIX</span>
-                </div>
-              </div>
-            </div>
-            <div class="testimonial-card">
-              <div class="testimonial-text">"This seamless integration enhanced our business operations and efficiency. Highly recommend for its intuitive interface."</div>
-              <div class="testimonial-author">
-                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop&crop=face" alt="Omar Raza">
-                <div class="testimonial-author-info">
-                  <span class="testimonial-name">Omar Raza</span>
-                  <span class="testimonial-role">CEO, TechFlow</span>
-                </div>
-              </div>
-            </div>
-            <!-- Repeat -->
-            <div class="testimonial-card">
-              <div class="testimonial-text">"The MDIX project required complex integrations, and the team delivered beyond our expectations. The system is robust, secure, and has greatly improved our operational efficiency."</div>
-              <div class="testimonial-author">
-                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face" alt="Sarah Jenkins">
-                <div class="testimonial-author-info">
-                  <span class="testimonial-name">Sarah Jenkins</span>
-                  <span class="testimonial-role">Project Lead, MDIX</span>
-                </div>
-              </div>
-            </div>
-            <div class="testimonial-card">
-              <div class="testimonial-text">"This seamless integration enhanced our business operations and efficiency. Highly recommend for its intuitive interface."</div>
-              <div class="testimonial-author">
-                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop&crop=face" alt="Omar Raza">
-                <div class="testimonial-author-info">
-                  <span class="testimonial-name">Omar Raza</span>
-                  <span class="testimonial-role">CEO, TechFlow</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 

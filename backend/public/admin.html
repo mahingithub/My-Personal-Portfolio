@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard — Portfolio Messages</title>
+  <title>Admin Dashboard — Portfolio</title>
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
@@ -105,6 +105,66 @@
       display: none;
     }
     .login-error.show { display: block; }
+
+    [hidden] { display: none !important; }
+
+    /* ===== TABS: Messages / Homepage / Videos ===== */
+    .tabs { display: flex; gap: 8px; padding: 20px 32px 0; flex-wrap: wrap; }
+    .panel { padding: 24px 32px 48px; max-width: 1200px; }
+    .panel-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 16px; }
+    .panel-head h2 { font-size: 20px; }
+    .panel-head p, .panel-note { color: var(--text-secondary); font-size: 14px; max-width: 640px; }
+    .panel-actions { display: flex; gap: 8px; }
+    .panel-sub { font-size: 15px; margin: 32px 0 12px; }
+    .panel-sub small { color: var(--text-muted); font-weight: 400; }
+
+    .pick-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin-top: 16px; }
+    .pick {
+      position: relative; display: grid; gap: 8px; padding: 8px; text-align: left;
+      background: var(--bg-card); border: 2px solid var(--border); border-radius: var(--radius);
+      color: var(--text-primary); font-family: inherit; cursor: pointer; transition: border-color 0.2s;
+    }
+    .pick:hover { border-color: var(--accent-dark); }
+    .pick.is-picked { border-color: var(--accent); }
+    .pick img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border-radius: 8px; }
+    .pick-name { font-size: 13px; font-weight: 600; }
+    .pick-name small { color: var(--text-muted); font-weight: 400; }
+    .pick-badge {
+      position: absolute; top: 14px; left: 14px; width: 28px; height: 28px; border-radius: 50%;
+      display: grid; place-items: center; font-size: 13px; font-weight: 700;
+      background: var(--accent); color: var(--bg-primary);
+    }
+    .pick:not(.is-picked) .pick-badge { display: none; }
+
+    .upload-card {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; align-items: end;
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px;
+    }
+    .field { display: grid; gap: 6px; font-size: 13px; color: var(--text-secondary); }
+    .field small { color: var(--text-muted); }
+    .field input, .field select {
+      padding: 11px 14px; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 8px;
+      color: var(--text-primary); font-family: inherit; font-size: 14px; outline: none;
+    }
+    .field input:focus, .field select:focus { border-color: var(--accent); }
+    .upload-progress { grid-column: 1 / -1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+    .upload-progress i { display: block; height: 100%; width: calc(var(--p, 0) * 100%); background: var(--accent); transition: width 0.2s; }
+    .upload-card .btn { justify-self: start; }
+    .upload-card .btn:disabled { opacity: 0.6; cursor: wait; }
+
+    .video-list { display: grid; gap: 10px; }
+    .video-row {
+      display: grid; grid-template-columns: 96px 1fr auto; gap: 16px; align-items: center;
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px;
+    }
+    .video-thumb { position: relative; display: block; aspect-ratio: 9 / 16; border-radius: 8px; overflow: hidden; background: var(--bg-primary); }
+    .video-thumb img, .video-thumb video { width: 100%; height: 100%; object-fit: cover; }
+    .video-thumb i {
+      position: absolute; inset: 0; margin: auto; width: 32px; height: 32px; border-radius: 50%;
+      display: grid; place-items: center; font-size: 20px; background: rgba(0, 0, 0, 0.55); color: #fff;
+    }
+    .video-row div { display: grid; gap: 2px; font-size: 14px; }
+    .video-row span, .video-row small { color: var(--text-secondary); font-size: 13px; }
 
     /* ===== MAIN LAYOUT ===== */
     .app { display: none; }
@@ -367,6 +427,9 @@
       .messages-table tbody td { display: block; padding: 4px 0; border-bottom: none; max-width: 100%; }
       .modal { max-width: 100%; border-radius: 16px; }
       .login-card { padding: 36px 24px; margin: 0 16px; }
+      .tabs, .panel { padding-left: 16px; padding-right: 16px; }
+      .video-row { grid-template-columns: 72px 1fr; }
+      .video-row .btn { grid-column: 2; justify-self: start; }
     }
   </style>
 </head>
@@ -395,11 +458,11 @@
     <!-- Navbar -->
     <nav class="navbar">
       <div class="navbar-brand">
-        <i class="bx bx-envelope"></i>
-        Portfolio <span>Messages</span>
+        <i class="bx bx-grid-alt"></i>
+        Portfolio <span>Admin</span>
       </div>
       <div class="navbar-actions">
-        <button class="btn btn-outline" onclick="loadMessages()">
+        <button class="btn btn-outline" onclick="refreshTab()">
           <i class="bx bx-refresh"></i> Refresh
         </button>
         <button class="btn btn-outline" onclick="handleLogout()">
@@ -408,6 +471,13 @@
       </div>
     </nav>
 
+    <div class="tabs" role="tablist" aria-label="Admin sections">
+      <button class="filter-btn active" type="button" data-tab="messages" onclick="showTab('messages')"><i class="bx bx-envelope"></i> Messages</button>
+      <button class="filter-btn" type="button" data-tab="homepage" onclick="showTab('homepage')"><i class="bx bx-home"></i> Homepage</button>
+      <button class="filter-btn" type="button" data-tab="videos" onclick="showTab('videos')"><i class="bx bx-video"></i> Videos</button>
+    </div>
+
+    <div class="tab-panel" id="tab-messages">
     <!-- Stats -->
     <div class="stats-bar" id="statsBar">
       <div class="stat-card">
@@ -469,6 +539,53 @@
       <!-- Pagination -->
       <div class="pagination" id="pagination"></div>
     </div>
+    </div>
+
+    <!-- Homepage: which projects the Featured work spotlight shows -->
+    <section class="tab-panel panel" id="tab-homepage" hidden>
+      <div class="panel-head">
+        <div>
+          <h2>Featured work</h2>
+          <p>Pick up to 5 projects for the spotlight near the top of the homepage. They appear in the order you pick them.</p>
+        </div>
+        <div class="panel-actions">
+          <button class="btn btn-outline" type="button" onclick="saveFeatured([])"><i class="bx bx-reset"></i> Use defaults</button>
+          <button class="btn btn-accent" type="button" id="saveFeaturedBtn" onclick="saveFeatured()"><i class="bx bx-save"></i> Save</button>
+        </div>
+      </div>
+      <p class="panel-note" id="featuredNote"></p>
+      <div class="pick-grid" id="pickGrid"></div>
+    </section>
+
+    <!-- Videos: uploads for the homepage's Watch section -->
+    <section class="tab-panel panel" id="tab-videos" hidden>
+      <div class="panel-head">
+        <div>
+          <h2>Videos</h2>
+          <p>Uploads appear first in the homepage’s “Watch” section, newest first. For a client testimonial, use their words as the title and “Name · Business” as the caption.</p>
+        </div>
+      </div>
+      <form class="upload-card" id="uploadForm" onsubmit="uploadVideo(event)">
+        <label class="field">Video file <small>MP4, WebM or MOV, up to 100 MB (720p is plenty)</small>
+          <input type="file" id="videoFile" accept="video/mp4,video/webm,video/quicktime" required>
+        </label>
+        <label class="field">Title
+          <input type="text" id="videoTitle" maxlength="120" required placeholder="e.g. Our orders doubled after the new site">
+        </label>
+        <label class="field">Caption <small>optional</small>
+          <input type="text" id="videoCaption" maxlength="160" placeholder="e.g. Rahim Uddin · Owner, Kodom">
+        </label>
+        <label class="field">Project <small>optional, links to its case study</small>
+          <select id="videoProject"><option value="">None</option></select>
+        </label>
+        <div class="upload-progress" id="uploadProgress" hidden><i></i></div>
+        <button class="btn btn-accent" type="submit" id="uploadBtn"><i class="bx bx-upload"></i> Upload</button>
+      </form>
+      <h3 class="panel-sub">Uploaded</h3>
+      <div class="video-list" id="videoList"></div>
+      <h3 class="panel-sub">Built in <small>from js/projects.js, shown after your uploads</small></h3>
+      <div class="video-list" id="builtinList"></div>
+    </section>
   </div>
 
   <!-- ===== MESSAGE DETAIL MODAL ===== -->
@@ -492,6 +609,9 @@
 
   <!-- Toast Container -->
   <div class="toast-container" id="toastContainer"></div>
+
+  <!-- The projects and built-in videos the homepage uses -->
+  <script src="js/projects.js"></script>
 
   <script>
     // ============================================
@@ -820,6 +940,202 @@
         }
       } catch (error) {
         showToast('Server error', 'error');
+      }
+    }
+
+    // ============================================
+    // 🗂️ Tabs
+    // ============================================
+    let currentTab = 'messages';
+    const tabLoaders = { messages: () => loadMessages(), homepage: () => loadHomepage(), videos: () => loadVideos() };
+
+    function showTab(tab) {
+      currentTab = tab;
+      document.querySelectorAll('[data-tab]').forEach((button) => button.classList.toggle('active', button.dataset.tab === tab));
+      document.querySelectorAll('.tab-panel').forEach((panel) => { panel.hidden = panel.id !== `tab-${tab}`; });
+      tabLoaders[tab]();
+    }
+    function refreshTab() { tabLoaders[currentTab](); }
+
+    // JSON API call with the admin password; throws with the server's message.
+    async function api(path, options = {}) {
+      const res = await fetch(`${API_BASE}${path}`, { ...options, headers: { 'x-admin-password': adminPassword, ...options.headers } });
+      const body = await res.json().catch(() => null);
+      if (!res.ok || !body?.success) throw new Error(body?.message || `Server error (${res.status})`);
+      return body.data;
+    }
+
+    const portfolio = window.PORTFOLIO || { projects: [], videos: [] };
+    const pickable = portfolio.projects.filter((project) => !project.draft && project.cover);
+    const MAX_FEATURED = 5;
+
+    // ============================================
+    // 🏠 Homepage: featured projects
+    // ============================================
+    let picked = [];
+
+    async function loadHomepage() {
+      const note = document.getElementById('featuredNote');
+      try {
+        const site = await api('/api/site');
+        picked = site.featured || pickable.filter((project) => project.featured).map((project) => project.slug).slice(0, MAX_FEATURED);
+        note.textContent = site.featured ? 'This is your saved choice.' : 'Nothing saved yet, so the homepage uses the defaults from js/projects.js (ticked below).';
+      } catch (error) {
+        note.textContent = error.message;
+      }
+      renderPicks();
+    }
+
+    function renderPicks() {
+      document.getElementById('pickGrid').innerHTML = pickable.map((project) => {
+        const order = picked.indexOf(project.slug);
+        return `
+          <button type="button" class="pick${order >= 0 ? ' is-picked' : ''}" aria-pressed="${order >= 0}" onclick="togglePick('${project.slug}')">
+            <img src="${escapeHtml(project.cover.src)}" alt="" loading="lazy">
+            <span class="pick-badge">${order + 1}</span>
+            <span class="pick-name">${escapeHtml(project.name)}${project.demo ? ' <small>Concept</small>' : ''}</span>
+          </button>`;
+      }).join('');
+    }
+
+    function togglePick(slug) {
+      if (picked.includes(slug)) picked = picked.filter((item) => item !== slug);
+      else if (picked.length < MAX_FEATURED) picked.push(slug);
+      else return showToast(`Up to ${MAX_FEATURED} projects. Untick one first.`, 'error');
+      renderPicks();
+    }
+
+    async function saveFeatured(list = picked) {
+      if (list.length === 0 && picked.length && list !== picked && !confirm('Go back to the defaults from js/projects.js?')) return;
+      try {
+        await api('/api/site/featured', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ featured: list }) });
+        showToast(list.length ? 'Saved. The homepage shows your picks now.' : 'Back to the defaults.', 'success');
+        loadHomepage();
+      } catch (error) {
+        showToast(escapeHtml(error.message), 'error');
+      }
+    }
+
+    // ============================================
+    // 🎬 Videos
+    // ============================================
+    function videoRow(video, id) {
+      const project = pickable.find((item) => item.slug === video.project);
+      return `
+        <div class="video-row">
+          <a class="video-thumb" href="${escapeHtml(video.src)}" target="_blank" rel="noopener" title="Play in a new tab"${video.wide ? ' style="aspect-ratio: 16 / 9"' : ''}>
+            ${video.poster ? `<img src="${escapeHtml(video.poster)}" alt="" loading="lazy">` : `<video src="${escapeHtml(video.src)}#t=1" preload="metadata" muted playsinline></video>`}
+            <i class="bx bx-play"></i>
+          </a>
+          <div>
+            <strong>${escapeHtml(video.title)}</strong>
+            ${video.caption ? `<span>${escapeHtml(video.caption)}</span>` : ''}
+            ${project ? `<small>Links to ${escapeHtml(project.name)}</small>` : ''}
+          </div>
+          ${id ? `<button class="btn btn-danger" type="button" onclick="deleteVideo('${id}')"><i class="bx bx-trash"></i> Delete</button>` : ''}
+        </div>`;
+    }
+
+    async function loadVideos() {
+      const select = document.getElementById('videoProject');
+      if (select.options.length === 1) {
+        select.insertAdjacentHTML('beforeend', pickable.map((project) => `<option value="${project.slug}">${escapeHtml(project.name)}</option>`).join(''));
+      }
+      document.getElementById('builtinList').innerHTML = (portfolio.videos || []).map((video) => videoRow(video)).join('');
+      const list = document.getElementById('videoList');
+      try {
+        const site = await api('/api/site');
+        list.innerHTML = site.videos.length
+          ? site.videos.map((video) => videoRow({ ...video, src: API_BASE + video.src, poster: video.poster && API_BASE + video.poster }, video.id)).join('')
+          : '<p class="panel-note">No uploads yet.</p>';
+      } catch (error) {
+        list.innerHTML = `<p class="panel-note">${escapeHtml(error.message)}</p>`;
+      }
+    }
+
+    // Reads the video's shape and grabs a poster frame in the browser, so the server needs no video tools.
+    function inspectVideo(file) {
+      return new Promise((resolve) => {
+        const video = document.createElement('video');
+        const url = URL.createObjectURL(file);
+        const done = (result) => { URL.revokeObjectURL(url); resolve(result); };
+        video.muted = true;
+        video.playsInline = true;
+        video.preload = 'auto';
+        video.onloadedmetadata = () => { video.currentTime = Math.min(5, (video.duration || 0) / 4); }; // past any fade-in
+        video.onseeked = () => {
+          const scale = Math.min(1, 1280 / Math.max(video.videoWidth, video.videoHeight));
+          const canvas = document.createElement('canvas');
+          canvas.width = Math.round(video.videoWidth * scale);
+          canvas.height = Math.round(video.videoHeight * scale);
+          canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+          canvas.toBlob((poster) => done({ wide: video.videoWidth > video.videoHeight, poster }), 'image/jpeg', 0.82);
+        };
+        video.onerror = () => done({ wide: false, poster: null }); // e.g. a format this browser can't preview
+        video.src = url;
+      });
+    }
+
+    // Raw upload with progress (fetch can't report upload progress).
+    function send(path, body, type, onProgress) {
+      return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', `${API_BASE}${path}`);
+        xhr.setRequestHeader('x-admin-password', adminPassword);
+        xhr.setRequestHeader('Content-Type', type);
+        if (onProgress) xhr.upload.onprogress = (event) => event.lengthComputable && onProgress(event.loaded / event.total);
+        xhr.onload = () => {
+          let res = null;
+          try { res = JSON.parse(xhr.responseText); } catch { /* not JSON */ }
+          if (xhr.status < 300 && res?.success) resolve(res.data);
+          else reject(new Error(res?.message || `Upload failed (${xhr.status}).`));
+        };
+        xhr.onerror = () => reject(new Error('The connection dropped. Please try again.'));
+        xhr.send(body);
+      });
+    }
+
+    async function uploadVideo(event) {
+      event.preventDefault();
+      const form = event.target;
+      const file = document.getElementById('videoFile').files[0];
+      if (!file) return;
+      if (file.size > 100 * 1024 * 1024) return showToast('That file is over 100 MB. Export it at 720p and try again.', 'error');
+      const button = document.getElementById('uploadBtn');
+      const bar = document.getElementById('uploadProgress');
+      button.disabled = true;
+      bar.hidden = false;
+      bar.style.setProperty('--p', 0);
+      try {
+        const { wide, poster } = await inspectVideo(file);
+        const query = new URLSearchParams({
+          title: document.getElementById('videoTitle').value.trim(),
+          caption: document.getElementById('videoCaption').value.trim(),
+          project: document.getElementById('videoProject').value,
+          filename: file.name,
+          wide: wide ? '1' : '',
+        });
+        const video = await send(`/api/site/videos?${query}`, file, file.type || 'video/mp4', (part) => bar.style.setProperty('--p', part));
+        if (poster) await send(`/api/site/videos/${video.id}/poster`, poster, 'image/jpeg').catch(() => showToast('The video is up, but its poster image failed.', 'error'));
+        showToast('Uploaded. It’s on the homepage now.', 'success');
+        form.reset();
+        loadVideos();
+      } catch (error) {
+        showToast(escapeHtml(error.message), 'error');
+      } finally {
+        button.disabled = false;
+        bar.hidden = true;
+      }
+    }
+
+    async function deleteVideo(id) {
+      if (!confirm('Delete this video from the homepage? This can’t be undone.')) return;
+      try {
+        await api(`/api/site/videos/${id}`, { method: 'DELETE' });
+        showToast('Video deleted.', 'success');
+        loadVideos();
+      } catch (error) {
+        showToast(escapeHtml(error.message), 'error');
       }
     }
 

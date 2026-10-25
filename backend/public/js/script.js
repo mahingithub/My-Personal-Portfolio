@@ -53,7 +53,8 @@
   const briefUrl = project => `index.html${project ? `?ref=${encodeURIComponent(project.slug)}` : ''}#contact`;
 
   // Where the contact API runs: the backend on Render (it also works when Render serves these pages).
-  const BACKEND_URL = 'https://my-personal-portfolio-lzff.onrender.com';
+  // On :5000 the local backend (npm start in backend/) is serving these pages, so use it instead.
+  const BACKEND_URL = location.port === '5000' ? location.origin : 'https://my-personal-portfolio-lzff.onrender.com';
 
   const contactChannels = project => [
     contact.whatsapp && { id: 'whatsapp', icon: 'whatsapp', label: 'WhatsApp', detail: 'Chat with me now', href: whatsappUrl(greeting(project)), external: true },
@@ -388,17 +389,47 @@
   /* ---------------------------------------------------------------------
    * Homepage: featured work spotlight and "See all projects"
    * ------------------------------------------------------------------- */
-  // To choose the featured projects, add `featured: true` to their entries in js/projects.js.
-  // Until any are marked, the first three published client projects with a screenshot are used.
+  // The featured projects are picked in the admin panel (Homepage tab). Without a saved pick, or
+  // while the backend doesn't answer, the projects marked `featured: true` in js/projects.js are
+  // used; until any are marked, the first three published client projects with a screenshot.
   const withCover = published.filter(project => project.cover);
   const marked = withCover.filter(project => project.featured);
-  const featured = marked.length ? marked.slice(0, 5) : withCover.filter(project => !project.demo).slice(0, 3);
+  let featured = marked.length ? marked.slice(0, 5) : withCover.filter(project => !project.demo).slice(0, 3);
 
   const spotlight = document.getElementById('spotlight');
-  if (spotlight) {
-    if (featured.length) initSpotlight();
-    else spotlight.parentElement.hidden = true;
-  }
+  const seeAll = document.getElementById('see-all');
+  const videoRail = document.getElementById('video-rail');
+
+  // The admin panel's choices. A free Render backend can take ~30s to wake, so wait at most 3s
+  // and fall back to the defaults. The last answer is kept, so returning visitors don't wait.
+  const loadSite = () => {
+    let cached = null;
+    try { cached = JSON.parse(localStorage.getItem('site')); } catch { /* storage blocked */ }
+    const fresh = fetch(`${BACKEND_URL}/api/site`, { cache: 'no-store' })
+      .then(response => response.json())
+      .then(result => {
+        if (!result.success) return null;
+        try { localStorage.setItem('site', JSON.stringify(result.data)); } catch { /* storage blocked */ }
+        return result.data;
+      })
+      .catch(() => null);
+    return cached ? Promise.resolve(cached) : Promise.race([fresh, new Promise(resolve => window.setTimeout(resolve, 3000, null))]);
+  };
+
+  const renderHome = site => {
+    const picked = (site?.featured || []).map(slug => withCover.find(project => project.slug === slug)).filter(Boolean);
+    if (picked.length) featured = picked.slice(0, 5);
+    if (spotlight) {
+      if (featured.length) initSpotlight();
+      else spotlight.parentElement.hidden = true;
+    }
+    if (seeAll) renderSeeAll();
+    if (videoRail) renderVideos(site?.videos || []);
+    // The page-wide effects were set up before this content existed.
+    enhance(document);
+    bindMagnetic(document);
+  };
+  if (spotlight || seeAll || videoRail) loadSite().then(renderHome);
 
   function initSpotlight() {
     const count = featured.length;
@@ -615,8 +646,7 @@
     select(0);
   }
 
-  const seeAll = document.getElementById('see-all');
-  if (seeAll) {
+  function renderSeeAll() {
     const covers = [...projects.filter(project => project.cover && !featured.includes(project)), ...featured].slice(0, 3);
     const industries = `${categories.length} ${categories.length === 1 ? 'industry' : 'industries'}`;
     const summary = [countLabel(projects), industries].filter(Boolean).join(' · ');
@@ -631,6 +661,29 @@
         <span class="see-all-copy" aria-hidden="true"><strong>${roll('See all projects')}</strong><small>${escapeHtml(summary)}</small></span>
         <span class="see-all-go" data-magnetic-item aria-hidden="true">${icon('arrow-right')}${icon('arrow-right')}</span>
       </a>`;
+  }
+
+  /* ---------------------------------------------------------------------
+   * Homepage: videos
+   * ------------------------------------------------------------------- */
+  function renderVideos(uploaded) {
+    const fromBackend = path => (path ? BACKEND_URL + path : '');
+    const videos = [...uploaded.map(video => ({ ...video, src: fromBackend(video.src), poster: fromBackend(video.poster) })), ...(data.videos || [])];
+    videoRail.closest('section').hidden = !videos.length;
+    videoRail.innerHTML = videos.map(video => {
+      const project = projects.find(item => item.slug === video.project);
+      return `
+        <figure class="video-card${video.wide ? ' is-wide' : ''}">
+          <video src="${escapeHtml(video.src)}" poster="${escapeHtml(video.poster)}" controls playsinline preload="none" aria-label="${escapeHtml(video.title)}"></video>
+          <figcaption>
+            <strong>${escapeHtml(video.title)}</strong>
+            ${video.caption ? `<span>${escapeHtml(video.caption)}</span>` : ''}
+            ${project ? `<a class="text-link" href="${projectUrl(project)}">View case study<span class="visually-hidden">: ${escapeHtml(project.name)}</span> ${icon('arrow-right')}</a>` : ''}
+          </figcaption>
+        </figure>`;
+    }).join('');
+    // One video at a time: starting one pauses the rest.
+    videoRail.addEventListener('play', event => videoRail.querySelectorAll('video').forEach(video => video !== event.target && video.pause()), true);
   }
 
   /* ---------------------------------------------------------------------
@@ -998,8 +1051,10 @@
    * Button feedback: primary buttons lean toward the pointer, and every
    * button answers a press with a ripple.
    * ------------------------------------------------------------------- */
-  if (finePointer && !reduceMotion) {
-    document.querySelectorAll('.button-primary, [data-magnetic]').forEach(element => {
+  function bindMagnetic(root) {
+    if (!finePointer || reduceMotion) return;
+    root.querySelectorAll('.button-primary:not([data-magnetic-ready]), [data-magnetic]:not([data-magnetic-ready])').forEach(element => {
+      element.dataset.magneticReady = '';
       const mover = element.querySelector('[data-magnetic-item]') || element;
       const strength = Number(element.dataset.magnetic) || 0.3;
       const target = { x: 0, y: 0 };
@@ -1027,6 +1082,8 @@
       });
     });
   }
+
+  bindMagnetic(document);
 
   if (!reduceMotion) {
     document.addEventListener('pointerdown', event => {

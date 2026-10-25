@@ -18,6 +18,7 @@ const path = require('path');
 const connectDB = require('./config/db');
 const { isDBConnected } = connectDB;
 const contactRoutes = require('./routes/contactRoutes');
+const { router: siteRoutes, streamMedia } = require('./routes/siteRoutes');
 const { apiLimiter } = require('./middleware/rateLimiter');
 const { initializeSheet } = require('./config/googleSheets');
 
@@ -53,13 +54,13 @@ app.use(
 );
 
 // CORS - Allow frontend to communicate with backend.
-// FRONTEND_URL may list several sites, comma-separated. The Vercel deployments
-// of this project are always allowed, since Vercel serves one site from many URLs.
+// FRONTEND_URL may list several sites, comma-separated. The live site
+// (asrafalom.vercel.app) and its Vercel preview URLs are always allowed.
 const allowedOrigins = (process.env.FRONTEND_URL || '')
   .split(',')
   .map((url) => url.trim().replace(/\/+$/, ''))
   .filter(Boolean);
-const vercelOrigin = /^https:\/\/my-personal-portfolio[a-z0-9-]*\.vercel\.app$/;
+const vercelOrigin = /^https:\/\/asrafalom(-[a-z0-9-]+)?\.vercel\.app$/;
 
 app.use(
   cors({
@@ -89,6 +90,10 @@ app.use('/api', apiLimiter);
 
 // API routes
 app.use('/api', contactRoutes);
+app.use('/api', siteRoutes);
+
+// Uploaded videos and posters (outside /api so video seeking isn't rate limited)
+app.get('/media/:id', streamMedia);
 
 // Serve static files from the public folder (frontend)
 app.use(express.static(path.join(__dirname, 'public')));

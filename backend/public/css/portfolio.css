@@ -1281,6 +1281,65 @@ h2 {
   background:var(--bg-2);
 }
 
+
+/* Videos ---------------------------------------------------------------- */
+.video-rail {
+  --h:min(520px,70vh,128vw);
+  display:flex;
+  align-items:flex-start;
+  gap:18px;
+  overflow-x:auto;
+  overscroll-behavior-x:contain;
+  scroll-snap-type:x mandatory;
+  padding:4px 2px 16px;
+  scrollbar-width:thin;
+  scrollbar-color:var(--line-strong) transparent;
+}
+
+.video-card {
+  flex:none;
+  margin:0;
+  display:grid;
+  gap:12px;
+  scroll-snap-align:start;
+}
+
+.video-card video {
+  display:block;
+  height:var(--h);
+  aspect-ratio:9/16;
+  object-fit:cover;
+  border:1px solid var(--line-strong);
+  border-radius:var(--radius-lg);
+  background:var(--surface);
+  box-shadow:var(--shadow-3d);
+}
+
+.video-card.is-wide video {
+  height:min(var(--h),50vw);
+  aspect-ratio:16/9;
+}
+
+.video-card figcaption {
+  display:grid;
+  gap:4px;
+  max-width:calc(var(--h) * 9 / 16);
+}
+
+.video-card.is-wide figcaption {
+  max-width:calc(min(var(--h),50vw) * 16 / 9);
+}
+
+.video-card figcaption span {
+  color:var(--muted);
+  font-size:.875rem;
+}
+
+.video-card .text-link {
+  margin-top:4px;
+  width:fit-content;
+}
+
 .filter-bar {
   display:flex;
   align-items:center;
