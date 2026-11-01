@@ -42,6 +42,7 @@ html {
   scroll-behavior:smooth;
   scroll-padding-top:calc(var(--header-h) + 24px);
   background:var(--bg);
+  overflow-x:clip;
 }
 
 html:has(.jump-nav) {
@@ -49,6 +50,7 @@ html:has(.jump-nav) {
 }
 
 body {
+  position:relative;
   margin:0;
   background:var(--bg);
   color:var(--ink);
@@ -80,7 +82,7 @@ a {
   text-decoration:none;
 }
 
-img {
+img,video {
   display:block;
   max-width:100%;
 }
@@ -146,6 +148,7 @@ a,button {
   height:1px;
   overflow:hidden;
   clip:rect(0 0 0 0);
+  clip-path:inset(50%);
   white-space:nowrap;
 }
 
@@ -294,6 +297,7 @@ h2 {
 }
 
 .text-link {
+  position:relative;
   display:inline-flex;
   align-items:center;
   gap:8px;
@@ -1283,30 +1287,45 @@ h2 {
 
 
 /* Videos ---------------------------------------------------------------- */
+#videos {
+  container:videos / inline-size;
+}
+
 .video-rail {
-  --h:min(520px,70vh,128vw);
+  --h:min(520px,70dvh,128cqi);
+  position:relative;
   display:flex;
   align-items:flex-start;
   gap:18px;
   overflow-x:auto;
   overscroll-behavior-x:contain;
   scroll-snap-type:x mandatory;
+  scroll-padding-inline:2px;
   padding:4px 2px 16px;
   scrollbar-width:thin;
   scrollbar-color:var(--line-strong) transparent;
 }
 
 .video-card {
-  flex:none;
+  --card-w:min(calc(var(--h) * 9 / 16),calc(100cqi - 24px));
+  position:relative;
+  flex:0 0 var(--card-w);
+  min-inline-size:0;
   margin:0;
   display:grid;
+  grid-template-columns:minmax(0,1fr);
   gap:12px;
   scroll-snap-align:start;
 }
 
+.video-card.is-wide {
+  --card-w:min(calc(var(--h) * 16 / 9),calc(100cqi - 4px));
+}
+
 .video-card video {
   display:block;
-  height:var(--h);
+  inline-size:100%;
+  block-size:auto;
   aspect-ratio:9/16;
   object-fit:cover;
   border:1px solid var(--line-strong);
@@ -1316,18 +1335,30 @@ h2 {
 }
 
 .video-card.is-wide video {
-  height:min(var(--h),50vw);
   aspect-ratio:16/9;
 }
 
 .video-card figcaption {
   display:grid;
   gap:4px;
-  max-width:calc(var(--h) * 9 / 16);
+  min-inline-size:0;
+  overflow-wrap:break-word;
 }
 
-.video-card.is-wide figcaption {
-  max-width:calc(min(var(--h),50vw) * 16 / 9);
+@container videos (inline-size <= 560px) {
+  .video-rail {
+    --h:min(460px,68dvh,132cqi);
+    gap:14px;
+  }
+  .video-card {
+    --card-w:min(calc(var(--h) * 9 / 16),78cqi);
+  }
+  .video-card.is-wide {
+    --card-w:min(calc(var(--h) * 16 / 9),88cqi);
+  }
+  .video-card video {
+    border-radius:18px;
+  }
 }
 
 .video-card figcaption span {
@@ -3408,6 +3439,11 @@ h2 {
 @media (max-width:600px) {
   .container {
     width:calc(100% - 40px);
+  }
+  .video-rail {
+    margin-inline:-20px;
+    padding-inline:20px;
+    scroll-padding-inline:20px;
   }
   .section {
     padding-block:80px;

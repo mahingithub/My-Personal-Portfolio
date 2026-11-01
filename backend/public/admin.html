@@ -617,7 +617,9 @@
     // ============================================
     // ⚙️ Configuration
     // ============================================
-    const API_BASE = window.location.origin;
+    const API_BASE = ['5000', '5050'].includes(window.location.port) || window.location.hostname.endsWith('.onrender.com')
+      ? window.location.origin
+      : 'https://my-personal-portfolio-lzff.onrender.com';
     let adminPassword = '';
     let currentPage = 1;
     let currentFilter = 'all';
@@ -654,15 +656,20 @@
             passwordInput.value = '';
             passwordInput.focus();
           } else {
-            // e.g. 503 when the database is not connected: show the server's reason.
-            return res.json().catch(() => null).then((body) => {
-              errorEl.textContent = body?.message || `Server error (${res.status}). Please try again.`;
+            // e.g. 503 when the database is not connected or Render suspended the service: show the server's reason.
+            return res.text().catch(() => '').then((raw) => {
+              let body = null;
+              try { body = JSON.parse(raw); } catch { /* HTML response */ }
+              const suspended = /Service Suspended/i.test(raw);
+              errorEl.textContent = body?.message || (suspended
+                ? 'Backend service on Render is currently suspended. Resume it in the Render dashboard.'
+                : `Server error (${res.status}). Please try again.`);
               errorEl.classList.add('show');
             });
           }
         })
         .catch(() => {
-          errorEl.textContent = 'Server connection failed. Is the backend running?';
+          errorEl.textContent = `Could not reach backend (${API_BASE}). Check if the Render service is suspended or offline.`;
           errorEl.classList.add('show');
         });
     }

@@ -1477,11 +1477,13 @@ window.PORTFOLIO = {
    * `project` (a slug above) adds a link to that case study.
    */
   videos: [
-    { src: 'assets/video/to-let-pro-khata.mp4', poster: 'assets/video/to-let-pro-khata.jpg', title: 'To-Let Pro · rent ledger', caption: 'Feature reel in Bangla', project: 'to-let-pro' },
-    { src: 'assets/video/rivano-walkthrough.mp4', poster: 'assets/video/rivano-walkthrough.jpg', title: 'Rivano · store walkthrough', caption: 'The live store, page by page', project: 'rivano' },
-    { src: 'assets/video/modest-wear-film.mp4', poster: 'assets/video/modest-wear-film.jpg', title: 'Modest-wear fashion film', caption: 'Product film for a hijab and abaya collection', wide: true },
-    { src: 'assets/video/website-reel.mp4', poster: 'assets/video/website-reel.jpg', title: 'Facebook page or website?', caption: 'Mahin Studio promo reel in Bangla' },
+    { src: 'assets/video/ai-search-reel.mp4', poster: 'assets/video/ai-search-reel.jpg', title: 'Found on ChatGPT, not just Google', caption: 'Mahin Studio · AI search reel in Bangla' },
+    { src: 'assets/video/website-cost-reel.mp4', poster: 'assets/video/website-cost-reel.jpg', title: 'The real cost of no website', caption: 'Mahin Studio promo reel in Bangla' },
+    { src: 'assets/video/leaflet-vs-website-reel.mp4', poster: 'assets/video/leaflet-vs-website-reel.jpg', title: 'Landing page or full website?', caption: 'Mahin Studio promo reel in Bangla' },
     { src: 'assets/video/salesman-reel.mp4', poster: 'assets/video/salesman-reel.jpg', title: 'A salesman who never sleeps', caption: 'Mahin Studio promo reel in Bangla' },
-    { src: 'assets/video/to-let-pro-explainer.mp4', poster: 'assets/video/to-let-pro-explainer.jpg', title: 'To-Let Pro · explainer', caption: 'How renting works on To-Let Pro', project: 'to-let-pro', wide: true },
+    { src: 'assets/video/whatsapp-ai-reel.mp4', poster: 'assets/video/whatsapp-ai-reel.jpg', title: 'WhatsApp + AI · chat to sale', caption: '24/7 sales automation reel in Bangla' },
+    { src: 'assets/video/to-let-pro-ledger.mp4', poster: 'assets/video/to-let-pro-ledger.jpg', title: 'To-Let Pro · lending ledger', caption: 'Personal & shared debt tracking in Bangla', project: 'to-let-pro' },
+    { src: 'assets/video/to-let-pro-mess-meals.mp4', poster: 'assets/video/to-let-pro-mess-meals.jpg', title: 'To-Let Pro · mess & meal manager', caption: 'Meals, bazar & shared bills in Bangla', project: 'to-let-pro' },
+    { src: 'assets/video/to-let-pro-roommate-wallet.mp4', poster: 'assets/video/to-let-pro-roommate-wallet.jpg', title: 'To-Let Pro · Roommate Wallet', caption: 'Shared & offline expense tracking in Bangla', project: 'to-let-pro' },
   ],
 };
